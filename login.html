@@ -370,10 +370,33 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script type="module" src="/root/js/login.js"></script>
-  <script type="module">
-    import { redirectIfAuthenticated } from './js/auth-guard.js';
-    redirectIfAuthenticated();
+  <!-- Scripts corregidos - SOLO login.js -->
+  <script type="module" src="./root/js/login.js"></script>
+  
+  <!-- Debug y bloqueo de redirecciones -->
+  <script>
+  console.log('🔐 Login page cargada - Modo seguro activado');
+  
+  // Bloquear redirecciones automáticas
+  const originalReplace = window.location.replace;
+  const originalHref = Object.getOwnPropertyDescriptor(window.location, 'href').set;
+
+  window.location.replace = function(url) {
+    console.log('🚫 BLOQUEADO: location.replace ->', url);
+    return false;
+  };
+
+  Object.defineProperty(window.location, 'href', {
+    set: function(url) {
+      console.log('🚫 BLOQUEADO: location.href ->', url);
+      return false;
+    },
+    get: function() {
+      return window.location.toString();
+    }
+  });
+
+  console.log('✅ Sistema anti-redirección activado');
   </script>
 </body>
 </html>

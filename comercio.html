@@ -1161,16 +1161,6 @@
 <script src="root/js/comercio.js"></script>
 <script type="module" src="root/js/reseñas.js"></script>
 
-<!-- Autenticación -->
-<script type="module">
-  import { protectPage } from './root/js/auth-guard.js';
-  import { setupAuthUI } from './root/js/auth-ui.js';
-  import { logout } from './root/js/logout.js';
-  
-  protectPage();
-  setupAuthUI();
-  document.getElementById('logoutNavLink')?.addEventListener('click', logout);
-</script>
 
 <!-- Carrito -->
 <script type="module" src="root/js/carrito.js"></script>

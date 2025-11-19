@@ -1,10 +1,17 @@
-import { auth } from './firebase-app.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+// auth-guard.js DESACTIVADO - Sin redirecciones automáticas
+console.log('🛡️ Auth Guard - MODO PÚBLICO ACTIVADO');
 
-export function protectPage(redirectTo = "login.html") {
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = redirectTo;
-    }
-  });
+export function protectPage() {
+  console.log('✅ Modo público: Todas las páginas son accesibles sin login');
+  // No hacer nada - acceso libre
+}
+
+export function redirectIfAuthenticated() {
+  console.log('✅ Modo público: Sin redirecciones automáticas');
+  // No hacer nada
+}
+
+export function requireAuth() {
+  console.log('✅ Modo público: Sin requerimientos de autenticación');
+  return Promise.resolve(true); // Siempre permite acceso
 }
