@@ -370,26 +370,33 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Scripts corregidos -->
+  <!-- Scripts corregidos - SOLO login.js -->
   <script type="module" src="./root/js/login.js"></script>
   
-  <!-- Debug de rutas - temporal -->
+  <!-- Debug y bloqueo de redirecciones -->
   <script>
-  console.log('🔍 Debug de rutas en login.html:');
-  const filesToCheck = [
-    './root/js/login.js', 
-    './root/js/auth-ui.js',
-    './root/js/firebase-app.js'
-  ];
+  console.log('🔐 Login page cargada - Modo seguro activado');
+  
+  // Bloquear redirecciones automáticas
+  const originalReplace = window.location.replace;
+  const originalHref = Object.getOwnPropertyDescriptor(window.location, 'href').set;
 
-  filesToCheck.forEach(file => {
-    const fullUrl = new URL(file, window.location.href).href;
-    console.log(`Verificando: ${file}`);
-    
-    fetch(file)
-      .then(response => console.log(`✅ ${file}: ${response.status}`))
-      .catch(error => console.log(`❌ ${file}: ${error.message}`));
+  window.location.replace = function(url) {
+    console.log('🚫 BLOQUEADO: location.replace ->', url);
+    return false;
+  };
+
+  Object.defineProperty(window.location, 'href', {
+    set: function(url) {
+      console.log('🚫 BLOQUEADO: location.href ->', url);
+      return false;
+    },
+    get: function() {
+      return window.location.toString();
+    }
   });
+
+  console.log('✅ Sistema anti-redirección activado');
   </script>
 </body>
 </html>
