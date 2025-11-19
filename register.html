@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro | AquaQuality</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary-blue: #2c3e50;
+      --accent-blue: #3498db;
+      --light-blue: #ecf0f1;
+      --dark-blue: #1a252f;
+    }
+    
+    .register-container {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .register-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      max-width: 800px;
+      width: 100%;
+      overflow: hidden;
+      border: none;
+    }
+    
+    .register-header {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .register-logo {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+    
+    .register-body {
+      padding: 2rem;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    
+    .form-control {
+      border-radius: 8px;
+      padding: 12px 15px;
+      border: 2px solid #e9ecef;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background: var(--light-blue);
+    }
+    
+    .form-control:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 0.3rem rgba(52, 152, 219, 0.15);
+      background: white;
+    }
+    
+    .btn-register {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: white;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    
+    .btn-register:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+    
+    .input-icon {
+      position: relative;
+    }
+    
+    .input-icon .form-control {
+      padding-left: 45px;
+    }
+    
+    .input-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-blue);
+      z-index: 5;
+    }
+    
+    .register-footer {
+      border-top: 1px solid #e9ecef;
+      padding: 1.5rem 2rem;
+      background: var(--light-blue);
+      text-align: center;
+    }
+    
+    .back-login {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .back-login:hover {
+      color: var(--primary-blue);
+    }
+    
+    .brand-text {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .tagline {
+      opacity: 0.9;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    
+    .message-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      padding: 12px;
+      font-weight: 500;
+    }
+    
+    .message-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 8px;
+      padding: 12px;
+      font-weight: 500;
+    }
+    
+    .message-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+      border-radius: 8px;
+      padding: 12px;
+      font-weight: 500;
+    }
+    
+    .form-section {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--accent-blue);
+    }
+    
+    .section-title {
+      color: var(--primary-blue);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    .password-strength {
+      height: 4px;
+      border-radius: 2px;
+      margin-top: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .strength-weak { background: #dc3545; width: 25%; }
+    .strength-fair { background: #ffc107; width: 50%; }
+    .strength-good { background: #28a745; width: 75%; }
+    .strength-strong { background: #20c997; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <div class="register-card">
+      <!-- Header -->
+      <div class="register-header">
+        <div class="register-logo">
+          <i class="fas fa-tint"></i>
+        </div>
+        <h1 class="brand-text mb-2">AQUAQUALITY</h1>
+        <p class="tagline mb-0">Únete a nuestra comunidad</p>
+      </div>
+      
+      <!-- Body -->
+      <div class="register-body">
+        <form id="registerForm">
+          <!-- Información Personal -->
+          <div class="form-section">
+            <h6 class="section-title">
+              <i class="fas fa-user me-2"></i>Información Personal
+            </h6>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="name" class="form-label fw-semibold">Nombre completo *</label>
+                <div class="input-icon">
+                  <i class="fas fa-user"></i>
+                  <input type="text" class="form-control" id="name" placeholder="Ej: Juan Pérez García" required>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="phone" class="form-label fw-semibold">Teléfono *</label>
+                <div class="input-icon">
+                  <i class="fas fa-phone"></i>
+                  <input type="tel" class="form-control" id="phone" placeholder="Ej: +52 5512345678" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="company" class="form-label fw-semibold">Empresa</label>
+                <div class="input-icon">
+                  <i class="fas fa-building"></i>
+                  <input type="text" class="form-control" id="company" placeholder="Ej: Aqua Solutions SA">
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="position" class="form-label fw-semibold">Puesto</label>
+                <div class="input-icon">
+                  <i class="fas fa-briefcase"></i>
+                  <input type="text" class="form-control" id="position" placeholder="Ej: Gerente de Calidad">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información de Cuenta -->
+          <div class="form-section">
+            <h6 class="section-title">
+              <i class="fas fa-key me-2"></i>Información de Cuenta
+            </h6>
+            <div class="row">
+              <div class="col-12 mb-3">
+                <label for="email" class="form-label fw-semibold">Correo electrónico *</label>
+                <div class="input-icon">
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" class="form-control" id="email" placeholder="tu@empresa.com" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mb-3">
+                    <label for="topic" class="form-label fw-semibold">Topic MQTT (Opcional)</label>
+                    <div class="input-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                        <input type="text" class="form-control" id="topic" name="topic" 
+                              placeholder="Ej: aquaquality/mi-estacion-123">
+                    </div>
+                    <small class="form-text text-muted">
+                        Identificador único para recibir datos de tus dispositivos IoT. Si lo dejas vacío, se generará automáticamente.
+                    </small>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="password" class="form-label fw-semibold">Contraseña *</label>
+                <div class="input-icon">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" class="form-control" id="password" placeholder="Mínimo 8 caracteres" required minlength="8">
+                </div>
+                <div class="password-strength" id="passwordStrength"></div>
+                <small class="form-text text-muted">
+                  La contraseña debe tener al menos 8 caracteres
+                </small>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="confirmPassword" class="form-label fw-semibold">Confirmar contraseña *</label>
+                <div class="input-icon">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" class="form-control" id="confirmPassword" placeholder="Repite tu contraseña" required>
+                </div>
+                <small id="passwordMatch" class="form-text"></small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información de Negocio -->
+          <div class="form-section">
+            <h6 class="section-title">
+              <i class="fas fa-chart-line me-2"></i>Información de Negocio
+            </h6>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="clientType" class="form-label fw-semibold">Tipo de cliente *</label>
+                <select class="form-select" id="clientType" required>
+                  <option value="">Selecciona una opción</option>
+                  <option value="residencial">Residencial</option>
+                  <option value="comercial">Comercial</option>
+                  <option value="industrial">Industrial</option>
+                  <option value="municipal">Municipal/Gobierno</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="companySize" class="form-label fw-semibold">Tamaño de empresa</label>
+                <select class="form-select" id="companySize">
+                  <option value="">Selecciona una opción</option>
+                  <option value="micro">Micro (1-10 empleados)</option>
+                  <option value="pequena">Pequeña (11-50 empleados)</option>
+                  <option value="mediana">Mediana (51-250 empleados)</option>
+                  <option value="grande">Grande (251+ empleados)</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-12 mb-3">
+                <label for="sector" class="form-label fw-semibold">Sector industrial</label>
+                <select class="form-select" id="sector">
+                  <option value="">Selecciona tu sector</option>
+                  <option value="alimentos">Alimentos y Bebidas</option>
+                  <option value="farmaceutico">Farmacéutico</option>
+                  <option value="hospitales">Hospitales y Salud</option>
+                  <option value="manufactura">Manufactura</option>
+                  <option value="hoteles">Hoteles y Restaurantes</option>
+                  <option value="agricultura">Agricultura</option>
+                  <option value="mineria">Minería</option>
+                  <option value="otros">Otros</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="form-section">
+            <h6 class="section-title">
+              <i class="fas fa-map-marker-alt me-2"></i>Ubicación
+            </h6>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="country" class="form-label fw-semibold">País *</label>
+                <select class="form-select" id="country" required>
+                  <option value="">Selecciona tu país</option>
+                  <option value="MX">México</option>
+                  <option value="US">Estados Unidos</option>
+                  <option value="CA">Canadá</option>
+                  <option value="ES">España</option>
+                  <option value="CO">Colombia</option>
+                  <option value="AR">Argentina</option>
+                  <option value="otros">Otro</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="city" class="form-label fw-semibold">Ciudad *</label>
+                <input type="text" class="form-control" id="city" placeholder="Ej: Ciudad de México" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-12 mb-3">
+                <label for="address" class="form-label fw-semibold">Dirección</label>
+                <textarea class="form-control" id="address" rows="2" placeholder="Dirección completa"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Términos y Newsletter -->
+          <div class="form-section">
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="terms" required>
+                <label class="form-check-label" for="terms">
+                  Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a> y la <a href="#" class="text-decoration-none">política de privacidad</a> *
+                </label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="newsletter" checked>
+                <label class="form-check-label" for="newsletter">
+                  Deseo recibir información sobre nuevos productos y promociones
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mensaje -->
+          <div id="registerMessage" class="mb-4"></div>
+          
+          <!-- Botón de Registro -->
+          <button type="submit" class="btn btn-register w-100">
+            <i class="fas fa-user-plus me-2"></i>Crear Cuenta
+          </button>
+          
+          <!-- Login -->
+          <div class="text-center mt-4 pt-3 border-top">
+            <span class="text-muted">¿Ya tienes cuenta? </span>
+            <a href="login.html" class="text-decoration-none fw-semibold" style="color: var(--accent-blue);">
+              Inicia sesión aquí
+            </a>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Footer -->
+      <div class="register-footer">
+        <a href="index.html" class="back-login">
+          <i class="fas fa-arrow-left me-2"></i>Volver al Inicio
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module" src="/root/js/register.js"></script>
+</body>
+</html>

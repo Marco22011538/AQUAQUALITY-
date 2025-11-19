@@ -1,0 +1,564 @@
+/* =========================
+Variables y Clases Base
+========================= */
+:root {
+    /* Color principal de AQUAQUALITY (tu azul oscuro) */
+    --color-navy: #0e305e;
+    /* Color blanco base */
+    --color-light: #ffffff; 
+    /* NUEVO: Cian Eléctrico vibrante para acentos y modo oscuro */
+    --color-accent-vibrant: #00CFFF; 
+    /* Un azul más oscuro para fondos en modo oscuro */
+    --color-bg-dark: #071f3b;
+    /* Degradado metálico - Azul oscuro brillante */
+    --metallic-gradient: linear-gradient(145deg, #1b538e, #0e305e, #1b538e); 
+    /* Degradado metálico claro para el hover */
+    --metallic-hover-gradient: linear-gradient(145deg, #1e62a8, #103b6e, #1e62a8);
+}
+
+/* Define el color 'navy' para usarlo en Bootstrap */
+.bg-navy { background-color: var(--color-navy) !important; }
+.btn-navy { 
+    background-color: var(--color-navy);
+    border-color: var(--color-navy);
+}
+.btn-navy:hover { 
+    background-color: var(--color-bg-dark); /* Un tono más oscuro en hover */
+    border-color: var(--color-bg-dark);
+}
+.btn-outline-navy {
+    color: var(--color-navy);
+    border-color: var(--color-navy);
+}
+.btn-outline-navy:hover {
+    background-color: var(--color-navy);
+    color: var(--color-light);
+}
+.text-navy { color: var(--color-navy) !important; }
+
+/* Nuevo Botón de Acento Vibrante (para la sección Dashboard Preview) */
+.btn-accent-vibrant {
+    background-color: var(--color-accent-vibrant);
+    border-color: var(--color-accent-vibrant);
+    color: var(--color-navy); /* El color de la marca principal */
+}
+.btn-accent-vibrant:hover {
+    background-color: #00B2E6; /* Un cian un poco más oscuro en hover */
+    border-color: #00B2E6;
+    color: var(--color-navy);
+}
+
+
+/* =========================
+1. Iconos de Características (Centrado y Sin Fondo)
+========================= */
+/* El contenedor del icono para asegurar el centrado */
+.feature-icon-compact-container {
+    height: 60px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* El icono en sí, grande y de color principal */
+.feature-card-compact i {
+    font-size: 3rem; 
+    color: var(--color-navy) !important; 
+    background: none !important; 
+    padding: 0;
+    margin: 0;
+    transition: color 0.3s ease;
+    opacity: 1 !important;
+}
+
+/* Ajuste del badge de característica */
+.feature-badge-compact {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-light);
+    background-color: var(--color-navy);
+    border-radius: 0.25rem;
+}
+
+/* =========================
+2. Efecto Metálico al Hover (Aplicado a .interactive-card)
+========================= */
+
+/* Clase para todas las tarjetas que tendrán interacción */
+.interactive-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    overflow: hidden; 
+}
+
+/* Efecto de levantamiento y sombra al hacer hover */
+.interactive-card:hover {
+    transform: translateY(-5px); 
+    /* Sombra con el color de la marca */
+    box-shadow: 0 12px 25px rgba(14, 48, 94, 0.3), 0 0 0 5px rgba(14, 48, 94, 0.1); 
+}
+
+/* ESTILO METÁLICO: Se aplica al hacer HOVER en la tarjeta */
+.interactive-card:hover {
+    background: var(--metallic-hover-gradient) !important; 
+    color: var(--color-light) !important; /* Texto blanco puro */
+}
+
+/* Cambio de color de elementos internos en hover para el efecto metálico */
+.interactive-card:hover h5, 
+.interactive-card:hover h3,
+.interactive-card:hover i {
+    color: var(--color-light) !important; /* Títulos e iconos a blanco puro */
+    /* CORREGIDO: Se baja la opacidad de la sombra/brillo para la legibilidad */
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5); 
+}
+
+.interactive-card:hover p,
+.interactive-card:hover .text-muted {
+    color: var(--color-light) !important; 
+}
+
+.interactive-card:hover .feature-badge-compact {
+    /* El badge cambia a cian brillante al hacer hover en modo claro */
+    background-color: var(--color-accent-vibrant) !important; 
+    color: var(--color-navy) !important; 
+}
+
+/* =========================
+   AJUSTES DE COLOR PERMANENTES PARA LEGIBILIDAD (ÚLTIMAS CORRECCIONES)
+   ========================= */
+
+/* A. Hero Section (Inicio): Título Azul Metálico, Texto Negro */
+.compact-hero h1 {
+    /* Color azul metálico claro pegándole a marino */
+    color: #1b538e !important; 
+    transition: color 0.3s ease;
+}
+
+.compact-hero p.lead {
+    /* Texto negro */
+    color: #343a40 !important; 
+    transition: color 0.3s ease;
+    opacity: 1 !important; 
+}
+
+/* B. Nuestra Ubicación (#ubicacion): Fondo Navy y Textos Blancos */
+#ubicacion {
+    background-color: var(--color-navy) !important; 
+}
+
+/* Título principal de la sección Ubicación a BLANCO (Requerido) */
+#ubicacion h2 {
+    color: var(--color-light) !important;
+}
+
+/* Títulos, subtítulos, el texto "Purificadora Quivaldi" y sus íconos a Blanco */
+#ubicacion .card-body h5, /* CORRECCIÓN APLICADA: Ahora incluye "Información de Contacto" */
+#ubicacion h6,
+#ubicacion .card-body i {
+    color: var(--color-light) !important;
+}
+
+/* Párrafos y texto 'muted' a Blanco (incluye toda la Información de Contacto) */
+#ubicacion p,
+#ubicacion .card-text,
+#ubicacion .text-muted {
+    color: var(--color-light) !important; 
+    opacity: 0.85 !important;
+}
+
+/* C. Nuestra Trayectoria (#empresa): Fondo Navy y Textos Blancos (Corregido) */
+#empresa {
+    background-color: var(--color-navy) !important;
+}
+
+#empresa h2, 
+#empresa h5,
+#empresa p,
+#empresa .text-muted,
+#empresa i {
+    color: var(--color-light) !important;
+}
+
+/* D. Contacto (#contacto) Tarjetas: Fondo Navy y Textos Blancos (Corregido) */
+
+/* Aplicamos fondo navy a las tarjetas internas y texto blanco */
+#contacto .interactive-card {
+    background-color: var(--color-navy) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Todo el texto dentro de las tarjetas a Blanco */
+#contacto .interactive-card h5,
+#contacto .interactive-card h6,
+#contacto .interactive-card p,
+#contacto .interactive-card .text-muted,
+#contacto .interactive-card .form-label { /* Incluye la etiqueta "Envía tu Consulta" */
+    color: var(--color-light) !important;
+}
+
+/* Asegurar que los iconos de check en la segunda tarjeta sean verdes brillantes */
+#contacto .interactive-card .bi-check-circle-fill {
+    color: #28a745 !important;
+}
+
+/* Corregir los campos de formulario para que sean legibles sobre fondo oscuro */
+#formularioContacto .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--color-light) !important;
+}
+#formularioContacto .form-control:focus {
+    border-color: var(--color-accent-vibrant) !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 207, 255, 0.25) !important;
+}
+#formularioContacto .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+#formularioContacto .btn-navy {
+    /* Mantener el botón azul marino para contraste */
+    color: var(--color-light) !important; 
+}
+
+
+/* =========================
+3. Efecto de Contraste al Scroll (Dark Mode Dinámico - Transición Suave 2.0s)
+========================= */
+
+/* Transiciones optimizadas a 2.0 segundos */
+.transition-bg-color {
+    transition: background-color 2.0s ease-out, color 2.0s ease-out; 
+}
+
+body#main-body {
+    transition: background-color 2.0s ease-out; 
+}
+
+body.scrolled-contrast {
+    background-color: var(--color-navy); 
+}
+
+/* Aplicamos el contraste a los elementos DENTRO del body en modo oscuro */
+body.scrolled-contrast .compact-hero,
+body.scrolled-contrast #producto,
+body.scrolled-contrast #dashboard-preview, 
+body.scrolled-contrast #especificaciones,
+body.scrolled-contrast #contacto { 
+    transition: background-color 2.0s ease-out !important; 
+    background-color: var(--color-bg-dark) !important; 
+}
+/* Aseguramos que las tarjetas de Ubicación y Contacto también se oscurezcan al máximo */
+body.scrolled-contrast #ubicacion,
+body.scrolled-contrast #empresa,
+body.scrolled-contrast #contacto .interactive-card {
+    background-color: var(--color-bg-dark) !important;
+}
+
+
+/* Cambio de color de texto SOLO en modo oscuro (scrolled-contrast) */
+/* La mayoría del texto ya es blanco por los ajustes permanentes, se mantiene esta regla para secciones de fondo claro */
+body.scrolled-contrast h1, 
+body.scrolled-contrast h2, 
+body.scrolled-contrast h3,
+body.scrolled-contrast .lead,
+body.scrolled-contrast p,
+body.scrolled-contrast .text-dark,
+body.scrolled-contrast .card-title,
+body.scrolled-contrast .card-text,
+body.scrolled-contrast .feature-title-compact,
+body.scrolled-contrast .feature-text-compact {
+    transition: color 2.0s ease-out !important; 
+    color: var(--color-light) !important; /* ¡BLANCO PURO solo en modo oscuro! */
+}
+
+/* Ajustes para texto secundario (Blanco puro con opacidad solo en modo oscuro) */
+body.scrolled-contrast .text-muted {
+    transition: color 2.0s ease-out !important;
+    color: var(--color-light) !important; 
+    opacity: 0.8; 
+}
+
+/* Ajuste de Botones/Badges solo en modo oscuro */
+body.scrolled-contrast .badge {
+    background-color: var(--color-accent-vibrant) !important; /* Acento cian */
+    color: var(--color-navy) !important;
+}
+body.scrolled-contrast .btn-outline-navy {
+    color: var(--color-light); 
+    border-color: var(--color-light);
+}
+body.scrolled-contrast .btn-outline-navy:hover {
+    background-color: var(--color-light);
+    color: var(--color-navy);
+}
+
+/* Estilo de Tarjetas en modo Contraste (Base) */
+body.scrolled-contrast .interactive-card {
+    transition: background-color 2.0s ease-out, box-shadow 0.3s ease !important; 
+    background-color: rgba(255, 255, 255, 0.05) !important; /* Tarjetas semi-transparentes oscuras */
+    border-color: rgba(255, 255, 255, 0.1) !important; 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5) !important; 
+}
+
+/* Aseguramos que los iconos mantengan el color de acento cian SOLO en modo oscuro */
+body.scrolled-contrast .feature-card-compact i,
+body.scrolled-contrast .spec-card i,
+body.scrolled-contrast .timeline-compact-grid .card i { 
+    transition: color 2.0s ease-out !important;
+    color: var(--color-accent-vibrant) !important; /* Iconos en cian eléctrico */
+    opacity: 1 !important;
+}
+body.scrolled-contrast .feature-badge-compact {
+    background-color: var(--color-accent-vibrant) !important;
+    color: var(--color-navy) !important;
+}
+
+/* Sobreescribimos el efecto hover metálico para el MODO OSCURO */
+body.scrolled-contrast .interactive-card:hover {
+    /* El hover sigue siendo rápido */
+    background: var(--metallic-hover-gradient) !important;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7), 0 0 0 5px rgba(30, 98, 168, 0.2); 
+}
+
+/* Estilos de la Navegación en Scroll */
+body.scrolled-contrast .navbar-brand span,
+body.scrolled-contrast .navbar-nav .nav-link {
+    transition: color 2.0s ease-out !important;
+    color: var(--color-light) !important; /* Blanco puro para la navegación */
+}
+
+/* =========================
+Estilos para el Formulario de Contacto (Asegurando que el texto del campo esté en blanco)
+========================= */
+
+/* Contenedor del formulario */
+#formularioContacto {
+    transition: all 0.3s ease;
+}
+
+/* Campos del formulario */
+#formularioContacto .form-control {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    /* Colores corregidos para fondo oscuro */
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--color-light) !important;
+}
+
+#formularioContacto .form-control:focus {
+    /* Colores corregidos para fondo oscuro */
+    border-color: var(--color-accent-vibrant) !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 207, 255, 0.25) !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: var(--color-light) !important;
+}
+
+/* Labels del formulario */
+#formularioContacto .form-label {
+    font-weight: 600;
+    /* Color corregido para fondo oscuro */
+    color: var(--color-light) !important;
+    margin-bottom: 8px;
+}
+/* Placeholder corregido */
+#formularioContacto .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+
+/* Botón de enviar */
+#formularioContacto .btn-navy {
+    background: var(--metallic-gradient);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    color: var(--color-light) !important; /* Asegurar color blanco */
+}
+
+#formularioContacto .btn-navy:hover {
+    background: var(--metallic-hover-gradient);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14, 48, 94, 0.3);
+}
+
+#formularioContacto .btn-navy:active {
+    transform: translateY(0);
+}
+
+/* Mensajes de alerta */
+#mensaje.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#mensaje.alert-success {
+    background: linear-gradient(145deg, rgba(40, 167, 69, 0.2), rgba(195, 230, 203, 0.1));
+    color: #f9fcfa;
+    border-left: 4px solid #28a745;
+}
+
+#mensaje.alert-danger {
+    background: linear-gradient(145deg, rgba(220, 53, 69, 0.2), rgba(245, 198, 203, 0.1));
+    color: #f8d7da;
+    border-left: 4px solid #dc3545;
+}
+
+/* =========================
+Modo Oscuro (Scroll) para el Formulario (Se mantienen como override si el body.scrolled-contrast se activa)
+========================= */
+
+/* Campos del formulario en modo oscuro */
+body.scrolled-contrast #formularioContacto .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: var(--color-light) !important;
+    transition: background-color 2.0s ease-out, border-color 2.0s ease-out;
+}
+
+body.scrolled-contrast #formularioContacto .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: var(--color-accent-vibrant) !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 207, 255, 0.25) !important;
+    color: var(--color-light) !important;
+}
+
+body.scrolled-contrast #formularioContacto .form-label {
+    color: var(--color-light) !important;
+    transition: color 2.0s ease-out;
+}
+
+body.scrolled-contrast #formularioContacto .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Botón en modo oscuro */
+body.scrolled-contrast #formularioContacto .btn-navy {
+    background: var(--metallic-gradient);
+}
+
+body.scrolled-contrast #formularioContacto .btn-navy:hover {
+    background: var(--metallic-hover-gradient);
+}
+
+/* =========================
+Estilos Adicionales de Consistencia
+========================= */
+
+/* Asegurar que todos los elementos tengan transiciones suaves */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Mejora visual para las secciones con bg-light */
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+/* Footer adjustments */
+.footer {
+    background: var(--metallic-gradient) !important;
+}
+
+/* Navegación fija mejorada */
+.navbar {
+    backdrop-filter: blur(10px);
+    background-color: rgba(14, 48, 94, 0.95) !important;
+}
+
+/* Estilos para Iconos No Opacos */
+.feature-card-compact i,
+.spec-card i,
+.timeline-compact-grid .card i {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* Ajustes finales de responsive y utilidad */
+@media (max-width: 768px) {
+    #formularioContacto .form-control {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    #formularioContacto .btn-navy {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+/* Asegurar que el botón de ubicación tenga mismo padding y estilo que otros botones */
+#btnMiUbicacion {
+    font-weight: 600;
+    padding: 0.65rem 1rem;
+    border-radius: 0.5rem;
+}
+
+/* =========================
+Alertas visibles en modo oscuro con tonos blancos
+========================= */
+body.scrolled-contrast #mensaje.alert-success {
+    background: rgba(255, 255, 255, 0.1) !important; /* Fondo blanco semitransparente */
+    color: #ffffff !important; /* Texto blanco */
+    border-left: 4px solid #ffffff !important; /* Borde blanco */
+}
+
+body.scrolled-contrast #mensaje.alert-danger {
+    background: rgba(255, 255, 255, 0.1) !important; /* Fondo blanco semitransparente */
+    color: #ffffff !important; /* Texto blanco */
+    border-left: 4px solid #ffffff !important; /* Borde blanco */
+}
+
+/* 🆕 ESTILOS PARA GRÁFICOS */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 1rem;
+}
+
+.chart-container canvas {
+    max-width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chart-container {
+        height: 250px;
+    }
+}
+
+/* Colores personalizados para gráficos */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}

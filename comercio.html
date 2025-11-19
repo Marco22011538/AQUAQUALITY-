@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AQUAQUALITY | Sistema de Monitoreo de Agua Purificada</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=ARQkJUND7TCCBjN72sl0IF6lxBM74FJsDMvXhHVrksA7w1LhxkxHgem9YnPmUY54yF7Pqt4mVhbnoBai&currency=MXN"></script>
+
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="root/css/comercio.css">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+<style>
+    /* ESTILOS MEJORADOS PARA TÉRMINOS Y CONDICIONES - CON MEJOR CONTRASTE */
+    .terms-section {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      border: 2px solid #e9ecef;
+      color: #495057 !important;
+    }
+    
+    .terms-checkbox {
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      background: white;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      color: #495057 !important;
+    }
+    
+    .terms-checkbox.checked {
+      background: #e8f4fd;
+      border-color: #28a745;
+      box-shadow: 0 2px 5px rgba(40, 167, 69, 0.2);
+    }
+    
+    .terms-checkbox .form-check-label {
+      cursor: pointer;
+      font-weight: normal;
+      line-height: 1.5;
+      display: block;
+      width: 100%;
+      color: #495057 !important;
+    }
+    
+    .terms-checkbox .form-check-input {
+      cursor: pointer;
+      transform: scale(1.2);
+      margin-right: 10px;
+    }
+    
+    .required-field::after {
+      content: " *";
+      color: #dc3545;
+      font-weight: bold;
+    }
+    
+    .payment-disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* Mejorar visibilidad del texto */
+    .terms-section h6 {
+      font-weight: 700;
+      color: #2c3e50 !important;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .terms-section p {
+      color: #495057 !important;
+      line-height: 1.6;
+    }
+    
+    .terms-section .small {
+      font-size: 0.875rem;
+      color: #6c757d !important;
+    }
+
+    /* Estilos para el modal de términos */
+    .terms-checkbox-modal {
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      background: white;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      color: #495057 !important;
+    }
+    
+    .terms-checkbox-modal.checked {
+      background: #e8f4fd;
+      border-color: #28a745;
+      box-shadow: 0 2px 5px rgba(40, 167, 69, 0.2);
+    }
+    
+    .terms-checkbox-modal .form-check-label {
+      cursor: pointer;
+      font-weight: normal;
+      line-height: 1.5;
+      display: block;
+      width: 100%;
+      color: #495057 !important;
+    }
+
+    /* Mejorar contraste del texto */
+    .text-muted {
+      color: #6c757d !important;
+      opacity: 0.9;
+    }
+    
+    .form-check-label {
+      color: #495057 !important;
+    }
+
+    /* Asegurar que el texto sea legible en modales */
+    .modal-body {
+      color: #495057 !important;
+      line-height: 1.6;
+    }
+    
+    .modal-body .form-check-label {
+      font-size: 1rem;
+      color: #495057 !important;
+    }
+
+    /* Estilos específicos para el carrito */
+    #cart-items .list-group-item {
+      border: 1px solid #e9ecef;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      color: #495057 !important;
+    }
+    
+    #cart-items h6 {
+      color: #2c3e50 !important;
+      font-weight: 600;
+    }
+    
+    #cart-items .text-muted {
+      color: #6c757d !important;
+      opacity: 0.9;
+    }
+
+    /* MEJORAS ADICIONALES DE CONTRASTE */
+    .bg-light {
+        background-color: #f8f9fa !important;
+    }
+    
+    .text-dark {
+        color: #2c3e50 !important;
+    }
+    
+    .btn {
+        font-weight: 600 !important;
+    }
+    
+    /* Mejorar contraste en modo oscuro para términos */
+    body.scrolled-contrast .terms-section {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        color: #e9ecef !important;
+    }
+    
+    body.scrolled-contrast .terms-checkbox {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        color: #e9ecef !important;
+    }
+    
+    body.scrolled-contrast .terms-checkbox .form-check-label,
+    body.scrolled-contrast .terms-section h6,
+    body.scrolled-contrast .terms-section p {
+        color: #e9ecef !important;
+        /* CORRECCIONES PARA TÉRMINOS Y CONDICIONES - ALTA VISIBILIDAD */
+.terms-section,
+.terms-checkbox,
+.terms-checkbox-modal {
+  color: #2c3e50 !important; /* Color oscuro para mejor contraste */
+}
+
+.terms-section h6 {
+  color: #1a2530 !important; /* Más oscuro para títulos */
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.terms-section p,
+.terms-section .small,
+.terms-checkbox .form-check-label,
+.terms-checkbox-modal .form-check-label {
+  color: #2c3e50 !important; /* Color oscuro consistente */
+  font-weight: 500; /* Un poco más grueso para mejor lectura */
+}
+
+/* Mejorar enlaces en términos */
+.terms-section a {
+  color: #007bff !important;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.terms-section a:hover {
+  color: #0056b3 !important;
+}
+
+/* Asegurar contraste en todos los estados */
+.form-check-label {
+  color: #2c3e50 !important;
+  font-weight: 500;
+}
+
+.text-muted {
+  color: #495057 !important; /* Menos "muted" para mejor visibilidad */
+  opacity: 1 !important; /* Eliminar transparencia */
+}
+
+/* Contraste mejorado para el modal */
+.modal-body {
+  color: #2c3e50 !important;
+  line-height: 1.6;
+}
+
+.modal-body .form-check-label {
+  color: #2c3e50 !important;
+  font-weight: 500;
+}
+
+/* Corrección específica para los checkboxes de términos */
+#terms-checkbox-1 .form-check-label,
+#terms-checkbox-2 .form-check-label,
+#terms-checkbox-3 .form-check-label {
+  color: #2c3e50 !important;
+  font-weight: 500;
+}
+
+/* Mejorar el texto dentro del offcanvas (carrito) */
+.offcanvas-body {
+  color: #2c3e50 !important;
+}
+
+.offcanvas-body .terms-section {
+  background: #ffffff !important;
+  border: 2px solid #e9ecef !important;
+}
+
+/* Asegurar que el texto sea visible en todos los fondos */
+.bg-light {
+  background-color: #f8f9fa !important;
+  color: #2c3e50 !important;
+}
+
+.alert-info {
+  color: #055160 !important;
+}
+    }
+</style>
+</head>
+<body id="main-body">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-navy sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-tint me-2"></i>AQUAQUALITY
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#hardware">Hardware</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#planes">Planes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#especificaciones">Especificaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#reseñas">Reseñas</a>
+                </li>
+            </ul>
+            
+            <!-- ELEMENTOS DE AUTENTICACIÓN -->
+            <ul class="navbar-nav me-3">
+                <li class="nav-item" id="loginNavItem">
+                    <a class="nav-link" href="login.html" id="loginNavLink">
+                        <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                    </a>
+                </li>
+                <li class="nav-item" id="registerNavItem">
+                    <a class="nav-link" href="register.html" id="registerNavLink">
+                        <i class="fas fa-user-plus me-1"></i>Registrarse
+                    </a>
+                </li>
+                <li class="nav-item d-none" id="userNavItem">
+                    <div class="nav-link">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="userName"></span>
+                    </div>
+                </li>
+                <li class="nav-item d-none" id="logoutNavItem">
+                    <button class="nav-link btn btn-link p-0 border-0" id="logoutNavLink" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-sign-out-alt me-1"></i>Cerrar Sesión
+                    </button>
+                </li>
+            </ul>
+            
+            <form class="d-flex me-3 d-none d-md-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar productos..." id="search-input" style="width: 200px;">
+            </form>
+            
+            <div class="position-relative">
+                <button class="btn btn-light position-relative" id="cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cart">
+                    <i class="fas fa-shopping-cart"></i> Carrito
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+  <!-- HERO SECTION -->
+  <div class="bg-navy text-light py-5 mb-4">
+    <div class="container py-5 text-center">
+      <h1 class="display-4 fw-bold">Sistema de Monitoreo de Agua Purificada</h1>
+      <p class="lead">Tecnología avanzada para garantizar la calidad del agua en tiempo real</p>
+      <div class="mt-4">
+        <a href="#hardware" class="btn btn-accent-vibrant btn-lg mt-3 me-3">Comprar Hardware</a>
+        <a href="#planes" class="btn btn-outline-light btn-lg mt-3">Ver Planes de Software</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-5" id="hardware">
+    <h2 class="text-center mb-5 border-bottom border-navy border-3 pb-2">Hardware Disponible</h2>
+    
+    <div class="row mb-4 d-md-none">
+      <div class="col-12">
+        <input class="form-control" type="search" placeholder="Buscar hardware..." id="search-input-mobile">
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col-md-6 mb-2">
+        <select class="form-select" id="category-filter">
+          <option value="all">Todos los dispositivos</option>
+          <option value="completo">Kit Completo</option>
+          <option value="sensores">Sensores Individuales</option>
+          <option value="accesorios">Accesorios</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-2">
+        <select class="form-select" id="sort-filter">
+          <option value="name">Ordenar por nombre</option>
+          <option value="price-low">Precio: menor a mayor</option>
+          <option value="price-high">Precio: mayor a menor</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row" id="product-list">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/Proo.png" class="card-img-top" alt="Kit Completo AQUAQUALITY Pro" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Kit Completo AquaMonitor Pro</h5>
+              <span class="badge bg-navy">completo</span>
+            </div>
+            <p class="card-text flex-grow-1">Sistema completo de monitoreo con todos los sensores incluidos</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Todos los sensores</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Carcasa IP67</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">WiFi/Bluetooth</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">App incluida</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$4500</span>
+              <button class="btn btn-navy" onclick="addToCart(1)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/PHPRO.png" class="card-img-top" alt="Sensor de pH PH-4502C" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Sensor de pH PH-4502C</h5>
+              <span class="badge bg-success">sensores</span>
+            </div>
+            <p class="card-text flex-grow-1">Sensor de pH líquido de alta precisión con electrodo E201C-BNC</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Rango 0-14 pH</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Precisión ±0.1</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Electrodo BNC</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$1200</span>
+              <button class="btn btn-navy" onclick="addToCart(2)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/TDS.png" class="card-img-top" alt="Sensor TDS SEN0244" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Sensor TDS SEN0244</h5>
+              <span class="badge bg-success">sensores</span>
+            </div>
+            <p class="card-text flex-grow-1">Medidor de sólidos disueltos totales para calidad de agua</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Rango 0-1000 ppm</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Precisión ±10%</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Analógico</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$950</span>
+              <button class="btn btn-navy" onclick="addToCart(3)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/DTH11.PNG" class="card-img-top" alt="Sensor DHT11" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Sensor DHT11</h5>
+              <span class="badge bg-success">sensores</span>
+            </div>
+            <p class="card-text flex-grow-1">Sensor de temperatura y humedad ambiental</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Temperatura 0-50°C</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Humedad 20-90%</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Bajo consumo</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$350</span>
+              <button class="btn btn-navy" onclick="addToCart(4)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/EstacionBase.png" class="card-img-top" alt="Estación Base WiFi" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Estación Base WiFi</h5>
+              <span class="badge bg-warning text-dark">accesorios</span>
+            </div>
+            <p class="card-text flex-grow-1">Estación central para conexión de sensores y comunicación cloud</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Conexión WiFi</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Alimentación 5V</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">4 puertos sensores</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$800</span>
+              <button class="btn btn-navy" onclick="addToCart(5)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/AQUALORA.png" class="card-img-top" alt="Kit Iniciación AQUALORA" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Kit Iniciación AquaMonitor</h5>
+              <span class="badge bg-navy">completo</span>
+            </div>
+            <p class="card-text flex-grow-1">Kit básico ideal para comenzar con el monitoreo de agua</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Sensor pH + TDS</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Estación base</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">App básica</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$2800</span>
+              <button class="btn btn-navy" onclick="addToCart(6)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/Carcasa.png" class="card-img-top" alt="Carcasa Protectora IP67" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Carcasa Protectora IP67</h5>
+              <span class="badge bg-warning text-dark">accesorios</span>
+            </div>
+            <p class="card-text flex-grow-1">Carcasa resistente al agua para protección de sensores</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">IP67</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Material ABS</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Fácil instalación</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$450</span>
+              <button class="btn btn-navy" onclick="addToCart(7)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm interactive-card">
+          <img src="root/img/Electrodo.png" class="card-img-top" alt="Pack Electrodos Repuesto" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">Pack Electrodos Repuesto</h5>
+              <span class="badge bg-warning text-dark">accesorios</span>
+            </div>
+            <p class="card-text flex-grow-1">Electrodos E201C-BNC de repuesto para sensor de pH</p>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark border me-1 mb-1 small">2 electrodos</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Compatibilidad total</span>
+              <span class="badge bg-light text-dark border me-1 mb-1 small">Larga duración</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-navy fs-5">$680</span>
+              <button class="btn btn-navy" onclick="addToCart(8)">
+                <i class="fas fa-cart-plus me-1"></i>Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN PLANES DE SOFTWARE -->
+<div class="container py-5" id="planes">
+    <h2 class="text-center mb-5 border-bottom border-success border-3 pb-2">Planes de Software</h2>
+    
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-navy interactive-card">
+          <div class="card-header bg-navy text-white text-center py-4">
+            <h4 class="card-title mb-1">Plan Básico</h4>
+            <p class="h2 mb-0">$299<span class="h6">/mes</span></p>
+            <small>Ideal para uso personal</small>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <ul class="list-unstyled mb-4 flex-grow-1">
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Monitoreo básico en tiempo real</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Alertas simples de calidad</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>App móvil básica</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Soporte por email</li>
+              <li class="mb-3"><i class="fas fa-times text-muted me-2"></i><span class="text-muted">Historial de datos</span></li>
+              <li class="mb-3"><i class="fas fa-times text-muted me-2"></i><span class="text-muted">Gráficos avanzados</span></li>
+              <li class="mb-3"><i class="fas fa-times text-muted me-2"></i><span class="text-muted">Reportes automáticos</span></li>
+            </ul>
+            <button class="btn btn-outline-navy mt-auto" onclick="selectPlan('Básico', 299)">Seleccionar Plan</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-warning interactive-card">
+          <div class="card-header bg-accent-vibrant text-navy text-center py-4">
+            <h4 class="card-title mb-1">Plan Intermedio</h4>
+            <p class="h2 mb-0">$599<span class="h6">/mes</span></p>
+            <small>Perfecto para pequeñas empresas</small>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <ul class="list-unstyled mb-4 flex-grow-1">
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Todo lo del Plan Básico</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Historial de datos (30 días)</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Gráficos básicos de tendencias</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Alertas personalizadas</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>App móvil completa</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Soporte prioritario</li>
+              <li class="mb-3"><i class="fas fa-times text-muted me-2"></i><span class="text-muted">Analytics avanzado</span></li>
+            </ul>
+            <button class="btn btn-accent-vibrant mt-auto" onclick="selectPlan('Intermedio', 599)">Seleccionar Plan</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-success interactive-card">
+          <div class="card-header bg-success text-white text-center py-4">
+            <h4 class="card-title mb-1">Plan Premium</h4>
+            <p class="h2 mb-0">$999<span class="h6">/mes</span></p>
+            <small>Para empresas y laboratorios</small>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <ul class="list-unstyled mb-4 flex-grow-1">
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Todo lo del Plan Intermedio</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Analytics avanzado</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Reportes automáticos PDF/Excel</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Historial ilimitado</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>API para integraciones</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Soporte 24/7 prioritario</li>
+              <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Múltiples usuarios</li>
+            </ul>
+            <button class="btn btn-success mt-auto" onclick="selectPlan('Premium', 999)">Seleccionar Plan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-5" id="especificaciones">
+    <h2 class="text-center mb-4 border-bottom border-accent-vibrant border-3 pb-2">Especificaciones Técnicas</h2>
+    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active text-navy" id="sensores-tab" data-bs-toggle="tab" data-bs-target="#sensores" type="button">
+          <i class="fas fa-microchip me-2"></i>Sensores
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-navy" id="funcionamiento-tab" data-bs-toggle="tab" data-bs-target="#funcionamiento" type="button">
+          <i class="fas fa-cogs me-2"></i>Funcionamiento
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-navy" id="beneficios-tab" data-bs-toggle="tab" data-bs-target="#beneficios" type="button">
+          <i class="fas fa-star me-2"></i>Beneficios
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content p-4 border border-top-0 bg-white rounded-bottom">
+      <div class="tab-pane fade show active" id="sensores" role="tabpanel">
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <h5><i class="fas fa-water me-2 text-navy"></i>Sensor de pH PH-4502C</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i>Rango de medición: 0-14 pH</li>
+              <li><i class="fas fa-check text-success me-2"></i>Electrodo E201C-BNC</li>
+              <li><i class="fas fa-check text-success me-2"></i>Alta precisión ±0.1 pH</li>
+              <li><i class="fas fa-check text-success me-2"></i>Temperatura de operación: 0-60°C</li>
+            </ul>
+          </div>
+          <div class="col-md-6 mb-4">
+            <h5><i class="fas fa-thermometer-half me-2 text-warning"></i>Sensor DHT11</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i>Temperatura: 0-50°C ±2°C</li>
+              <li><i class="fas fa-check text-success me-2"></i>Humedad: 20-90% ±5%</li>
+              <li><i class="fas fa-check text-success me-2"></i>Bajo consumo energético</li>
+            </ul>
+          </div>
+          <div class="col-md-6 mb-4">
+            <h5><i class="fas fa-vial me-2 text-accent-vibrant"></i>Sensor TDS SEN0244</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i>Sólidos Disueltos Totales</li>
+              <li><i class="fas fa-check text-success me-2"></i>Rango: 0-1000 ppm</li>
+              <li><i class="fas fa-check text-success me-2"></i>Precisión: ±10%</li>
+            </ul>
+          </div>
+          <div class="col-md-6 mb-4">
+            <h5><i class="fas fa-microchip me-2 text-success"></i>Características Generales</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i>Comunicación WiFi/Bluetooth</li>
+              <li><i class="fas fa-check text-success me-2"></i>Alimentación: 5V DC</li>
+              <li><i class="fas fa-check text-success me-2"></i>Carcasa IP67 resistente al agua</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="funcionamiento" role="tabpanel">
+        <p>Nuestro sistema monitorea continuamente la calidad del agua mediante sensores de última generación, proporcionando datos precisos en tiempo real a través de nuestra plataforma en la nube.</p>
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle me-2"></i>
+          El hardware se conecta automáticamente a nuestros servidores para el procesamiento de datos y análisis avanzado.
+        </div>
+        <div class="alert alert-success">
+          <i class="fas fa-mobile-alt me-2"></i>
+          Accede a los datos desde cualquier dispositivo con nuestra aplicación móvil y web responsive.
+        </div>
+      </div>
+      <div class="tab-pane fade" id="beneficios" role="tabpanel">
+        <p>Nuestra solución integral ofrece múltiples beneficios para garantizar la calidad y seguridad del agua:</p>
+        <ul class="list-unstyled">
+          <li><i class="fas fa-shield-alt text-navy me-2"></i>Monitoreo continuo 24/7</li>
+          <li><i class="fas fa-bell text-warning me-2"></i>Alertas inmediatas por cambios en la calidad</li>
+          <li><i class="fas fa-chart-line text-success me-2"></i>Tendencias y análisis predictivo</li>
+          <li><i class="fas fa-cloud text-accent-vibrant me-2"></i>Almacenamiento seguro en la nube</li>
+          <li><i class="fas fa-money-bill-wave text-success me-2"></i>Reducción de costos por mantenimiento preventivo</li>
+          <li><i class="fas fa-file-pdf text-danger me-2"></i>Reportes automáticos para cumplimiento normativo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+    <!-- SECCIÓN RESEÑAS -->
+<div class="container py-5" id="reseñas">
+    <h2 class="text-center mb-5 border-bottom border-accent-vibrant border-3 pb-2">Reseñas de Clientes</h2>
+      
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100 interactive-card">
+                <div class="card-body text-center">
+                    <div class="average-rating mb-2">0.0</div>
+                    <div class="star-rating mb-2" id="average-stars">
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p class="text-muted">Basado en <span id="total-reviews">0</span> reseñas</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8 mb-4">
+            <div class="card shadow-sm h-100 interactive-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Distribución de Calificaciones</h5>
+                    <div class="rating-distribution">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="me-2">5 estrellas</span>
+                            <div class="progress flex-grow-1 me-2">
+                                <div class="progress-bar bg-warning" role="progressbar" id="rating-5-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="rating-5-count">0</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="me-2">4 estrellas</span>
+                            <div class="progress flex-grow-1 me-2">
+                                <div class="progress-bar bg-warning" role="progressbar" id="rating-4-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="rating-4-count">0</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="me-2">3 estrellas</span>
+                            <div class="progress flex-grow-1 me-2">
+                                <div class="progress-bar bg-warning" role="progressbar" id="rating-3-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="rating-3-count">0</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="me-2">2 estrellas</span>
+                            <div class="progress flex-grow-1 me-2">
+                                <div class="progress-bar bg-warning" role="progressbar" id="rating-2-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="rating-2-count">0</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="me-2">1 estrella</span>
+                            <div class="progress flex-grow-1 me-2">
+                                <div class="progress-bar bg-warning" role="progressbar" id="rating-1-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="rating-1-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMULARIO DE RESEÑAS -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-sm interactive-card">
+                <div class="card-header bg-accent-vibrant text-navy">
+                    <h5 class="mb-0"><i class="fas fa-pen me-2"></i>Agregar Tu Reseña</h5>
+                </div>
+                <div class="card-body">
+                    <form id="formReseña">
+                        <div class="mb-3">
+                            <label class="form-label">Calificación</label>
+                            <div class="star-rating" id="rating-input">
+                                <span class="star" data-rating="1"><i class="far fa-star"></i></span>
+                                <span class="star" data-rating="2"><i class="far fa-star"></i></span>
+                                <span class="star" data-rating="3"><i class="far fa-star"></i></span>
+                                <span class="star" data-rating="4"><i class="far fa-star"></i></span>
+                                <span class="star" data-rating="5"><i class="far fa-star"></i></span>
+                            </div>
+                            <input type="hidden" id="selected-rating" value="0">
+                        </div>
+                        <div class="mb-3">
+                            <label for="comentario" class="form-label">Tu Reseña</label>
+                            <textarea class="form-control" id="comentario" rows="3" required maxlength="500" placeholder="Comparte tu experiencia con nuestros productos..."></textarea>
+                            <div class="form-text">Mínimo 10 caracteres, máximo 500</div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="recomendado">
+                            <label class="form-check-label" for="recomendado">¿Recomendarías nuestros productos?</label>
+                        </div>
+                        <button type="submit" class="btn btn-accent-vibrant">
+                            <i class="fas fa-paper-plane me-2"></i>Enviar Reseña
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LISTA DE RESEÑAS -->
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0">Reseñas Recientes</h4>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-accent-vibrant btn-sm active" data-rating="0">Todas</button>
+                    <button type="button" class="btn btn-outline-accent-vibrant btn-sm" data-rating="5">5★</button>
+                    <button type="button" class="btn btn-outline-accent-vibrant btn-sm" data-rating="4">4★</button>
+                    <button type="button" class="btn btn-outline-accent-vibrant btn-sm" data-rating="3">3★</button>
+                </div>
+            </div>
+            <div id="reviews-container">
+                <div class="text-center py-4">
+                    <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No hay reseñas aún. ¡Sé el primero en opinar!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="py-5 bg-navy text-light footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5 class="fw-bold d-flex align-items-center">
+                    <i class="bi bi-droplet-fill text-light me-2"></i>
+                    AQUAQUALITY
+                </h5>
+                <p class="text-light">Sistema IoT de monitoreo de calidad de agua con precisión del 98%. Tecnología confiable para tu negocio.</p>
+                <div class="social-links">
+                    <a href="#" class="text-light me-3 fs-5"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-light me-3 fs-5"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-light me-3 fs-5"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="text-light fs-5"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 mb-4">
+                <h6 class="fw-semibold">Navegación</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-1"><a href="#hardware" class="text-light text-decoration-none"><i class="bi bi-chevron-right me-1 small"></i>Hardware</a></li>
+                    <li class="mb-1"><a href="#planes" class="text-light text-decoration-none"><i class="bi bi-chevron-right me-1 small"></i>Planes de Software</a></li>
+                    <li class="mb-1"><a href="#especificaciones" class="text-light text-decoration-none"><i class="bi bi-chevron-right me-1 small"></i>Especificaciones</a></li>
+                    <li class="mb-1"><a href="#reseñas" class="text-light text-decoration-none"><i class="bi bi-chevron-right me-1 small"></i>Reseñas</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <h6 class="fw-semibold">Contacto</h6>
+                <p class="text-light mb-1">
+                    <i class="bi bi-geo-alt me-2"></i> Valle del Mezquital, Hidalgo, México
+                </p>
+                <p class="text-light mb-1">
+                    <i class="bi bi-telephone me-2"></i> +52 (771) 123-4567
+                </p>
+                <p class="text-light mb-2">
+                    <i class="bi bi-envelope me-2"></i> contacto@aquaquality.com
+                </p>
+                <p class="text-light mb-0">
+                    <i class="bi bi-clock me-2"></i> Lun - Vie: 8:00 AM - 6:00 PM
+                </p>
+            </div>
+            <div class="col-lg-3 col-md-5 mb-4">
+                <h6 class="fw-semibold">Newsletter</h6>
+                <p class="text-light small">Suscríbete para recibir actualizaciones y ofertas especiales.</p>
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Tu email">
+                    <button class="btn btn-light text-navy" type="button">
+                        <i class="bi bi-send"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr class="border-light my-4">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0 text-light">&copy; 2025 AQUAQUALITY. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-light text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#termsModal">Política de Privacidad</a>
+                <a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#termsModal">Términos de Servicio</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- CARRITO CON TÉRMINOS INTEGRADOS -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cart">
+    <div class="offcanvas-header bg-primary text-white">
+        <h5 class="offcanvas-title">
+            <i class="fas fa-shopping-cart me-2"></i>Carrito de Compras
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="cart-empty" class="text-center py-4">
+            <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+            <p class="text-muted">Tu carrito está vacío</p>
+            <a href="#hardware" class="btn btn-primary" data-bs-dismiss="offcanvas">Ver Hardware</a>
+        </div>
+        
+        <div id="cart-content" style="display: none;">
+            <ul id="cart-items" class="list-group mb-3"></ul>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fw-bold fs-5">Subtotal:</span>
+                <span class="fw-bold fs-5">$<span id="cart-subtotal">0</span></span>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">IVA (16%):</span>
+                <span class="text-muted">$<span id="cart-tax">0</span></span>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mb-4 border-top pt-3">
+                <span class="fw-bold fs-5">Total:</span>
+                <span class="fw-bold fs-4 text-primary">$<span id="cart-total">0</span></span>
+            </div>
+
+            <!-- SECCIÓN DE TÉRMINOS Y CONDICIONES VISIBLE Y OBLIGATORIA -->
+            <div class="terms-section mb-4">
+                <h6 class="mb-3 required-field">Aceptación de Términos y Condiciones</h6>
+                <p class="small text-muted mb-3">Para completar tu compra, debes aceptar nuestros términos y condiciones:</p>
+                
+                <div class="terms-checkbox" id="terms-checkbox-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="acceptTerms">
+                        <label class="form-check-label fw-bold" for="acceptTerms">
+                            Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Términos y Condiciones</a> de AQUAQUALITY
+                        </label>
+                    </div>
+                </div>
+
+                <div class="terms-checkbox" id="terms-checkbox-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="acceptPrivacy">
+                        <label class="form-check-label" for="acceptPrivacy">
+                            Acepto la <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Política de Privacidad</a> y el tratamiento de mis datos
+                        </label>
+                    </div>
+                </div>
+
+                <div class="terms-checkbox" id="terms-checkbox-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="acceptAge">
+                        <label class="form-check-label" for="acceptAge">
+                            Confirmo que soy mayor de 18 años y tengo capacidad legal para realizar esta compra
+                        </label>
+                    </div>
+                </div>
+
+                <div class="alert alert-info mt-3 small">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Importante:</strong> La aceptación de estos términos es obligatoria para proceder con el pago.
+                </div>
+            </div>
+
+            <!-- Opciones de Pago -->
+            <div class="payment-options mb-4">
+                <h6 class="mb-3">Método de Pago</h6>
+                
+                <!-- PayPal Button Container -->
+                <div id="paypal-button-container" class="mb-3"></div>
+                
+                <!-- Transferencia Bancaria -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="transferencia" checked>
+                    <label class="form-check-label" for="transferencia">
+                        <i class="fas fa-university me-2"></i>Transferencia Bancaria
+                    </label>
+                </div>
+                
+                <div id="transferencia-info" class="bg-light p-3 rounded small mt-2">
+                    <p class="mb-1"><strong>Banco:</strong> BBVA</p>
+                    <p class="mb-1"><strong>Cuenta:</strong> 0123 4567 8901 2345</p>
+                    <p class="mb-1"><strong>CLABE:</strong> 012 320 1234 5678 9012 34</p>
+                    <p class="mb-0"><strong>Beneficiario:</strong> AQUAQUALITY S.A. de C.V.</p>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="d-grid gap-2">
+                <button id="checkout-transferencia" class="btn btn-primary btn-lg py-2">
+                    <i class="fas fa-credit-card me-2"></i>Proceder con Transferencia
+                </button>
+                <button class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">
+                    <i class="fas fa-arrow-left me-2"></i>Seguir Comprando
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST PARA NOTIFICACIONES -->
+<div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3" role="alert" id="success-toast">
+    <div class="d-flex">
+      <div class="toast-body">
+        <i class="fas fa-check-circle me-2"></i>Producto agregado al carrito
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+</div>
+
+<!-- BANNER DE COOKIES -->
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;width:100%;background:#0077b6;color:white;padding:15px;text-align:center;z-index:1000;box-shadow:0 -2px 10px rgba(0,0,0,0.1);">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8 text-center text-md-start">
+        <span>🍪 Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies.</span>
+      </div>
+      <div class="col-md-4 text-center text-md-end mt-2 mt-md-0">
+        <button id="accept-cookies" class="btn btn-success btn-sm me-2">
+          <i class="fas fa-check me-1"></i>Aceptar
+        </button>
+        <a href="#" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#termsModal">
+          <i class="fas fa-info-circle me-1"></i>Más info
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE TÉRMINOS Y CONDICIONES COMPLETO -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">
+          <i class="fas fa-file-contract me-2"></i>Términos, Condiciones y Políticas
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+        
+        <!-- Términos y Condiciones -->
+        <section class="mb-5">
+          <h4 class="border-bottom pb-2 mb-4 text-primary">Términos y Condiciones de AQUAQUALITY</h4>
+          
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Importante:</strong> Al realizar una compra en nuestro sitio, aceptas automáticamente estos términos y condiciones.
+          </div>
+
+          <h5 class="mt-4">1. Uso del Sitio y Servicios</h5>
+          <p>Usted se compromete a utilizar nuestro sitio únicamente con fines legales y de acuerdo con la ley vigente. El acceso y uso del sitio está sujeto a estos términos y condiciones.</p>
+
+          <h5 class="mt-4">2. Propiedad Intelectual</h5>
+          <p>Todo el contenido de AquaQuality (textos, gráficos, logotipos, imágenes, software) es propiedad exclusiva de la empresa o sus licenciantes y está protegido por las leyes de propiedad intelectual.</p>
+
+          <h5 class="mt-4">3. Productos y Servicios</h5>
+          <p>Nos reservamos el derecho de modificar, suspender o interrumpir cualquier producto, servicio o promoción sin previo aviso. Los precios están sujetos a cambio sin notificación previa.</p>
+
+          <h5 class="mt-4">4. Proceso de Compra</h5>
+          <p>Al realizar un pedido, usted ofrece comprar los productos seleccionados. La aceptación del pedido se produce cuando enviamos la confirmación por correo electrónico.</p>
+
+          <h5 class="mt-4">5. Política de Devoluciones</h5>
+          <p>Las devoluciones se aceptan dentro de los 30 días posteriores a la compra, siempre que los productos estén en su estado original y con el empaque intacto.</p>
+
+          <h5 class="mt-4">6. Limitación de Responsabilidad</h5>
+          <p>No nos hacemos responsables de daños directos o indirectos derivados del uso del sitio o de los productos adquiridos, excepto en casos de negligencia demostrada.</p>
+
+          <h5 class="mt-4">7. Modificaciones</h5>
+          <p>Estos términos pueden actualizarse en cualquier momento y entrarán en vigor al publicarse en el sitio. Es responsabilidad del usuario revisar periódicamente los términos.</p>
+        </section>
+
+        <!-- Política de Privacidad -->
+        <section class="mb-5">
+          <h4 class="border-bottom pb-2 mb-4 text-success">Política de Privacidad</h4>
+          
+          <h5>1. Información que Recopilamos</h5>
+          <p>Recopilamos datos proporcionados voluntariamente (nombre, email, dirección) y datos automáticos (cookies, IP, navegador, comportamiento de navegación).</p>
+
+          <h5>2. Uso de la Información</h5>
+          <p>Usamos la información para procesar pedidos, enviar comunicaciones relevantes, mejorar la experiencia del usuario y personalizar el contenido.</p>
+
+          <h5>3. Compartir Información</h5>
+          <p>No vendemos datos a terceros; podemos compartir información con proveedores de servicios confiables necesarios para el funcionamiento del sitio.</p>
+
+          <h5>4. Seguridad de Datos</h5>
+          <p>Implementamos medidas técnicas y organizativas para proteger tu información contra accesos no autorizados y pérdidas.</p>
+
+          <h5>5. Derechos del Usuario</h5>
+          <p>Puedes acceder, rectificar o eliminar tus datos enviando un correo a <a href="mailto:contacto@aquaquality.com">contacto@aquaquality.com</a>.</p>
+        </section>
+
+        <!-- Política de Cookies -->
+        <section>
+          <h4 class="border-bottom pb-2 mb-4 text-warning">Política de Cookies</h4>
+          
+          <h5>1. ¿Qué son las Cookies?</h5>
+          <p>Pequeños archivos que se almacenan en tu dispositivo para mejorar la experiencia en el sitio, recordar preferencias y analizar tráfico.</p>
+
+          <h5>2. Tipos de Cookies que Utilizamos</h5>
+          <ul>
+            <li><strong>Necesarias:</strong> Esenciales para el funcionamiento básico del sitio</li>
+            <li><strong>Rendimiento:</strong> Analizan cómo los usuarios interactúan con el sitio</li>
+            <li><strong>Funcionalidad:</strong> Recuerdan tus preferencias y configuraciones</li>
+            <li><strong>Publicidad:</strong> Muestran contenido y anuncios relevantes</li>
+          </ul>
+
+          <h5>3. Gestión de Cookies</h5>
+          <p>Puedes aceptar, rechazar o eliminar cookies desde la configuración de tu navegador. Sin embargo, deshabilitar cookies esenciales puede afectar la funcionalidad del sitio.</p>
+        </section>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          <i class="fas fa-check me-2"></i>Entendido y Aceptado
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+
+<script src="root/js/script.js"></script>
+<script src="root/js/comercio.js"></script>
+<script type="module" src="root/js/reseñas.js"></script>
+
+<!-- Autenticación -->
+<script type="module">
+  import { protectPage } from './root/js/auth-guard.js';
+  import { setupAuthUI } from './root/js/auth-ui.js';
+  import { logout } from './root/js/logout.js';
+  
+  protectPage();
+  setupAuthUI();
+  document.getElementById('logoutNavLink')?.addEventListener('click', logout);
+</script>
+
+<!-- Carrito -->
+<script type="module" src="root/js/carrito.js"></script>
+
+<script>
+  // Sistema de Cookies
+  document.addEventListener('DOMContentLoaded', function() {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesBtn = document.getElementById('accept-cookies');
+    
+    // Verificar si ya aceptó las cookies
+    if(localStorage.getItem('cookiesAccepted') === 'true') {
+      cookieBanner.style.display = 'none';
+    }
+    
+    // Manejar aceptación de cookies
+    acceptCookiesBtn.addEventListener('click', function() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      cookieBanner.style.display = 'none';
+      showToast('Cookies aceptadas correctamente');
+    });
+
+    // Efectos visuales para checkboxes de términos
+    const checkboxes = document.querySelectorAll('.terms-checkbox .form-check-input');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const parentDiv = this.closest('.terms-checkbox');
+        if (this.checked) {
+          parentDiv.classList.add('checked');
+        } else {
+          parentDiv.classList.remove('checked');
+        }
+        
+        // Verificar si todos los términos están aceptados
+        checkTermsStatus();
+      });
+    });
+
+    // Función para verificar estado de términos
+    function checkTermsStatus() {
+      const termsAccepted = document.getElementById('acceptTerms').checked;
+      const privacyAccepted = document.getElementById('acceptPrivacy').checked;
+      const ageAccepted = document.getElementById('acceptAge').checked;
+      
+      const allAccepted = termsAccepted && privacyAccepted && ageAccepted;
+      const paymentSection = document.querySelector('.payment-options');
+      const checkoutBtn = document.getElementById('checkout-transferencia');
+      
+      if (allAccepted) {
+        paymentSection.classList.remove('payment-disabled');
+        checkoutBtn.disabled = false;
+        checkoutBtn.classList.remove('btn-secondary');
+        checkoutBtn.classList.add('btn-primary');
+      } else {
+        paymentSection.classList.add('payment-disabled');
+        checkoutBtn.disabled = true;
+        checkoutBtn.classList.remove('btn-primary');
+        checkoutBtn.classList.add('btn-secondary');
+      }
+    }
+
+    // Inicializar verificación de términos
+    checkTermsStatus();
+  });
+
+  // Función global para mostrar toast
+  function showToast(message, type = 'success') {
+    const toastElement = document.getElementById('success-toast');
+    if (!toastElement) return;
+    
+    // Cambiar color según el tipo
+    if (type === 'error') {
+      toastElement.className = 'toast align-items-center text-white bg-danger border-0 position-fixed bottom-0 end-0 m-3';
+    } else if (type === 'warning') {
+      toastElement.className = 'toast align-items-center text-white bg-warning border-0 position-fixed bottom-0 end-0 m-3';
+    } else {
+      toastElement.className = 'toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3';
+    }
+    
+    const toastBody = toastElement.querySelector('.toast-body');
+    const icon = type === 'error' ? 'fa-exclamation-circle' : 
+                 type === 'warning' ? 'fa-exclamation-triangle' : 'fa-check-circle';
+    
+    toastBody.innerHTML = `<i class="fas ${icon} me-2"></i>${message}`;
+    
+    // Mostrar el toast usando Bootstrap
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+  }
+</script>
+
+</body>
+</html>

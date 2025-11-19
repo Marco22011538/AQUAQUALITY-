@@ -1,0 +1,15 @@
+{
+  "name": "aquaquality-dashboard",
+  "version": "1.0.0",
+  "description": "Sistema de monitoreo de calidad de agua",
+  "scripts": {
+    "build": "node build.js",
+    "predeploy": "npm run build"
+  },
+  "keywords": ["aquaquality", "iot", "water-monitoring"],
+  "author": "EQUIPO AQUAQUALITY",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
