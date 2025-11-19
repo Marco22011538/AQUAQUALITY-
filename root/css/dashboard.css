@@ -1,0 +1,609 @@
+/* DASHBOARD.CSS OPTIMIZADO - INDICADORES ACCESIBLES Y RESPONSIVE */
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #34495e;
+    --tds-color: #3498db;
+    --ph-color: #9b59b6;
+    --temp-color: #e74c3c;
+    --hum-color: #2ecc71;
+    --color-navy: #2c3e50;
+    --aquaquality-blue: #0066cc;
+}
+
+/* 🎨 AQUAQUALITY EN AZUL */
+.aquaquality-blue {
+    color: var(--aquaquality-blue) !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--aquaquality-blue), #0099ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ESTILOS BASE Y LAYOUT */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* DASHBOARD HEADER */
+.dashboard-header {
+    background: linear-gradient(135deg, var(--color-navy) 0%, #34495e 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+/* INDICADORES VISUALES */
+.indicators-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+}
+
+.indicators-title {
+    color: var(--color-navy);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light-color);
+}
+
+.indicator-row {
+    margin-bottom: 30px;
+}
+
+.indicator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.indicator-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.indicator-unit {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* BARRAS DE INDICADORES */
+.indicator-bars {
+    display: flex;
+    height: 35px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.indicator-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+    position: relative;
+    min-width: 50px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.indicator-bar:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+/* COLORES DE BARRAS */
+.bar-acceptable {
+    background: linear-gradient(135deg, var(--success-color), #2ecc71);
+}
+
+.bar-caution {
+    background: linear-gradient(135deg, var(--warning-color), #f1c40f);
+}
+
+.bar-critical {
+    background: linear-gradient(135deg, var(--danger-color), #c0392b);
+}
+
+/* ETIQUETAS DE VALORES */
+.bar-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #6c757d;
+    font-weight: 500;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.bar-label {
+    text-align: center;
+    flex: 1;
+}
+
+/* LEYENDA */
+.legend-improved {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.legend-item:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.legend-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.legend-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+}
+
+.legend-description {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* ANCHO ESPECÍFICO PARA CADA INDICADOR */
+.tds-bars .indicator-bar:nth-child(1) { width: 60%; }
+.tds-bars .indicator-bar:nth-child(2) { width: 25%; }
+.tds-bars .indicator-bar:nth-child(3) { width: 15%; }
+
+.ph-bars .indicator-bar:nth-child(1) { width: 30%; }
+.ph-bars .indicator-bar:nth-child(2) { width: 40%; }
+.ph-bars .indicator-bar:nth-child(3) { width: 30%; }
+
+.temp-bars .indicator-bar:nth-child(1) { width: 20%; }
+.temp-bars .indicator-bar:nth-child(2) { width: 40%; }
+.temp-bars .indicator-bar:nth-child(3) { width: 25%; }
+.temp-bars .indicator-bar:nth-child(4) { width: 15%; }
+
+.hum-bars .indicator-bar:nth-child(1) { width: 15%; }
+.hum-bars .indicator-bar:nth-child(2) { width: 50%; }
+.hum-bars .indicator-bar:nth-child(3) { width: 20%; }
+.hum-bars .indicator-bar:nth-child(4) { width: 15%; }
+
+/* TARJETAS DE MÉTRICAS */
+.metric-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none !important;
+    border-radius: 15px !important;
+    overflow: hidden;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.metric-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.metric-icon i {
+    font-size: 1.5rem;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    margin: 1rem 0 0.5rem 0;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.metric-title {
+    font-size: 1.1rem;
+    color: var(--color-navy);
+    font-weight: 600;
+}
+
+.metric-unit {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* COLORES DE MÉTRICAS */
+.tds-card { border-left: 4px solid var(--tds-color) !important; }
+.tds-card .metric-value { color: var(--tds-color); }
+.ph-card { border-left: 4px solid var(--ph-color) !important; }
+.ph-card .metric-value { color: var(--ph-color); }
+.temp-card { border-left: 4px solid var(--temp-color) !important; }
+.temp-card .metric-value { color: var(--temp-color); }
+.hum-card { border-left: 4px solid var(--hum-color) !important; }
+.hum-card .metric-value { color: var(--hum-color); }
+
+/* COLORES ESPECÍFICOS PARA TEXTO */
+.tds-color { color: var(--tds-color) !important; }
+.ph-color { color: var(--ph-color) !important; }
+.temp-color { color: var(--temp-color) !important; }
+.hum-color { color: var(--hum-color) !important; }
+
+/* COLORES DE FONDO PARA ICONOS */
+.bg-tds { background-color: var(--tds-color) !important; }
+.bg-ph { background-color: var(--ph-color) !important; }
+.bg-temp { background-color: var(--temp-color) !important; }
+.bg-hum { background-color: var(--hum-color) !important; }
+
+/* GAUGES */
+.gauge-container {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.gauge-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.gauge-title {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
+.gauge-wrapper {
+    position: relative;
+    margin: 0 auto;
+    width: 180px;
+    height: 140px;
+}
+
+.gauge-canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.gauge-value {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.gauge-legend {
+    font-size: 0.75rem;
+    margin-top: 15px;
+}
+
+.gauge-legend .badge {
+    margin: 2px;
+    font-size: 0.65rem;
+}
+
+/* BOTONES */
+.btn-navy { 
+    background-color: var(--color-navy); 
+    border-color: var(--color-navy); 
+    color: white; 
+    border-radius: 8px; 
+    padding: 0.5rem 1.5rem; 
+    font-weight: 600; 
+}
+
+.btn-navy:hover { 
+    background-color: #1e3a5f; 
+    border-color: #1e3a5f; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3); 
+}
+
+.btn-outline-navy { 
+    border-color: var(--color-navy); 
+    color: var(--color-navy); 
+    border-radius: 8px; 
+    padding: 0.5rem 1.5rem; 
+    font-weight: 600; 
+}
+
+.btn-outline-navy:hover { 
+    background-color: var(--color-navy); 
+    color: white; 
+}
+
+/* NAVEGACIÓN */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: white;
+}
+
+.bg-navy {
+    background-color: var(--color-navy) !important;
+}
+
+/* TARJETAS INTERACTIVAS */
+.interactive-card {
+    transition: all 0.3s ease;
+}
+
+.interactive-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .indicator-bars { height: 30px; }
+    .indicator-bar { font-size: 0.65rem; }
+    .metric-value { font-size: 2rem; }
+    .metric-icon { width: 50px; height: 50px; }
+    .metric-icon i { font-size: 1.2rem; }
+    .gauge-container { height: 250px; padding: 15px; }
+    .gauge-value { font-size: 1.3rem; }
+    .gauge-wrapper { width: 150px; height: 120px; }
+}
+
+@media (max-width: 576px) {
+    .indicator-bars { height: 25px; }
+    .indicator-bar { font-size: 0.6rem; }
+    .bar-labels { font-size: 0.6rem; }
+    .metric-card { margin-bottom: 1rem; }
+    .gauge-container { height: 220px; margin: 0.5rem 0; }
+    .gauge-wrapper { width: 130px; height: 100px; }
+}
+
+/* ANIMACIONES */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+}
+.data-update { animation: pulse 2s infinite; }
+
+/* UTILIDADES */
+.text-navy { color: var(--color-navy) !important; }
+.border-navy { border-color: var(--color-navy) !important; }
+
+/* ESTADÍSTICAS */
+.stats-card {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-left: 4px solid #0d6efd;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.stat-tds { color: var(--tds-color); }
+.stat-ph { color: var(--ph-color); }
+.stat-temp { color: var(--temp-color); }
+.stat-hum { color: var(--hum-color); }
+
+/* GRÁFICOS */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 1rem;
+}
+
+.chart-container canvas {
+    max-width: 100%;
+}
+
+.chart-placeholder {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+/* EFECTOS DE MONITOREO EN TIEMPO REAL */
+.data-update {
+    animation: dataPulse 1s ease-in-out;
+}
+
+@keyframes dataPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.live-monitoring {
+    border-left: 4px solid #28a745 !important;
+    background: linear-gradient(135deg, #f8fff9, #e8f5e8);
+}
+
+.gauge-container.live {
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Indicador de sensor activo */
+.sensor-active::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: #28a745;
+    border-radius: 50%;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+/* 🆕 ESTILOS PARA QUITAR EFECTOS AZULES EN GRÁFICOS */
+.chartjs-render-monitor {
+    background-color: white !important;
+}
+
+.chartjs-tooltip {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid #dee2e6 !important;
+    color: #2c3e50 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.chartjs-tooltip-key {
+    background: transparent !important;
+}
+
+/* 🆕 DESACTIVAR COMPLETAMENTE EFECTOS DE HOVER */
+canvas:hover {
+    background-color: white !important;
+}
+
+.chart-container:hover {
+    background-color: white !important;
+}
+
+/* 🆕 QUITAR CUALQUIER FONDO AZUL EN GRÁFICOS */
+.chartjs-size-monitor,
+.chartjs-size-monitor-expand,
+.chartjs-size-monitor-shrink {
+    background: white !important;
+}
+
+/* 🆕 ESTILOS ESPECÍFICOS PARA TOOLTIPS */
+.chartjs-tooltip table {
+    background: white !important;
+    color: #2c3e50 !important;
+}
+
+.chartjs-tooltip td {
+    background: white !important;
+    color: #2c3e50 !important;
+    border: none !important;
+}
+
+.chartjs-tooltip td:first-child {
+    display: none !important; /* Oculta el cuadrito de color */
+}
+/* ELIMINAR ESPACIO EN BLANCO DEL DASHBOARD */
+main.container-fluid {
+    min-height: calc(100vh - 200px);
+}
+
+/* Asegurar que las tarjetas ocupen todo el espacio disponible */
+.interactive-card {
+    height: 100%;
+}
+
+/* Optimizar el footer */
+footer.bg-navy {
+    margin-top: auto;
+}
+
+/* Ajustar el contenedor principal */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Mejorar el espaciado de las secciones */
+.row {
+    margin-bottom: 1rem !important;
+}
+
+.row.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Asegurar que los gráficos se expandan correctamente */
+.chart-container {
+    position: relative;
+    height: 300px;
+    min-height: 300px;
+}
+
+/* Eliminar padding excesivo */
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Optimizar la tabla de historial */
+.table-responsive {
+    border-radius: 0.375rem;
+}

@@ -1,0 +1,1023 @@
+/* =========================
+Variables y Clases Base
+========================= */
+:root {
+    /* Color principal de AQUAQUALITY (tu azul oscuro) */
+    --color-navy: #0e305e;
+    /* Color blanco base */
+    --color-light: #ffffff; 
+    /* NUEVO: Cian Eléctrico vibrante para acentos y modo oscuro */
+    --color-accent-vibrant: #00CFFF; 
+    /* Un azul más oscuro para fondos en modo oscuro */
+    --color-bg-dark: #071f3b;
+    /* Degradado metálico - Azul oscuro brillante */
+    --metallic-gradient: linear-gradient(145deg, #1b538e, #0e305e, #1b538e); 
+    /* Degradado metálico claro para el hover */
+    --metallic-hover-gradient: linear-gradient(145deg, #1e62a8, #103b6e, #1e62a8);
+}
+
+/* Define el color 'navy' para usarlo en Bootstrap */
+.bg-navy { background-color: var(--color-navy) !important; }
+.btn-navy { 
+    background-color: var(--color-navy);
+    border-color: var(--color-navy);
+    color: var(--color-light);
+}
+.btn-navy:hover { 
+    background-color: var(--color-bg-dark);
+    border-color: var(--color-bg-dark);
+    color: var(--color-light);
+}
+.btn-outline-navy {
+    color: var(--color-navy);
+    border-color: var(--color-navy);
+}
+.btn-outline-navy:hover {
+    background-color: var(--color-navy);
+    color: var(--color-light);
+}
+.text-navy { color: var(--color-navy) !important; }
+
+/* Nuevo Botón de Acento Vibrante */
+.btn-accent-vibrant {
+    background-color: var(--color-accent-vibrant);
+    border-color: var(--color-accent-vibrant);
+    color: var(--color-navy);
+}
+.btn-accent-vibrant:hover {
+    background-color: #00B2E6;
+    border-color: #00B2E6;
+    color: var(--color-navy);
+}
+
+.btn-outline-accent-vibrant {
+    color: var(--color-accent-vibrant);
+    border-color: var(--color-accent-vibrant);
+}
+.btn-outline-accent-vibrant:hover {
+    background-color: var(--color-accent-vibrant);
+    color: var(--color-navy);
+}
+
+/* =========================
+1. Iconos de Características (Centrado y Sin Fondo)
+========================= */
+.feature-icon-compact-container {
+    height: 60px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.feature-card-compact i {
+    font-size: 3rem; 
+    color: var(--color-navy) !important; 
+    background: none !important; 
+    padding: 0;
+    margin: 0;
+    transition: color 0.3s ease;
+    opacity: 1 !important;
+}
+
+.feature-badge-compact {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-light);
+    background-color: var(--color-navy);
+    border-radius: 0.25rem;
+}
+
+/* =========================
+2. Efecto Metálico al Hover (Aplicado a .interactive-card)
+========================= */
+.interactive-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    overflow: hidden; 
+}
+
+.interactive-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 12px 25px rgba(14, 48, 94, 0.3), 0 0 0 5px rgba(14, 48, 94, 0.1); 
+}
+
+.interactive-card:hover {
+    background: var(--metallic-hover-gradient) !important; 
+    color: var(--color-light) !important;
+}
+
+.interactive-card:hover h5, 
+.interactive-card:hover h3,
+.interactive-card:hover h4,
+.interactive-card:hover h6,
+.interactive-card:hover i {
+    color: var(--color-light) !important;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5); 
+}
+
+.interactive-card:hover p,
+.interactive-card:hover .text-muted,
+.interactive-card:hover .card-text {
+    color: var(--color-light) !important; 
+}
+
+.interactive-card:hover .feature-badge-compact {
+    background-color: var(--color-accent-vibrant) !important; 
+    color: var(--color-navy) !important; 
+}
+
+/* =========================
+   AJUSTES DE COLOR PERMANENTES PARA LEGIBILIDAD
+   ========================= */
+
+/* Hero Section Comercio */
+.bg-navy.text-light.py-5.mb-4 h1 {
+    color: var(--color-light) !important;
+}
+
+.bg-navy.text-light.py-5.mb-4 .lead {
+    color: var(--color-light) !important;
+    opacity: 0.9;
+}
+
+/* Sección Hardware */
+#hardware h2 {
+    color: var(--color-navy) !important;
+}
+
+/* Sección Planes de Software - CORREGIDO */
+#planes h2 {
+    color: var(--color-navy) !important;
+}
+
+/* Mantener colores originales de los planes en modo claro */
+#planes .card-header.bg-navy {
+    background: var(--metallic-gradient) !important;
+    color: var(--color-light) !important;
+}
+
+#planes .card-header.bg-accent-vibrant {
+    background-color: var(--color-accent-vibrant) !important;
+    color: var(--color-navy) !important;
+}
+
+#planes .card-header.bg-success {
+    background-color: #198754 !important;
+    color: var(--color-light) !important;
+}
+
+#planes .btn-success {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+#planes .btn-success:hover {
+    background-color: #157347;
+    border-color: #146c43;
+}
+
+.border-navy {
+    border-color: var(--color-navy) !important;
+}
+
+.border-accent-vibrant {
+    border-color: var(--color-accent-vibrant) !important;
+}
+
+/* Sección Especificaciones - CORREGIDO */
+#especificaciones {
+    background-color: var(--color-light) !important;
+}
+
+#especificaciones h2 {
+    color: var(--color-navy) !important;
+}
+
+#especificaciones .tab-content {
+    background-color: var(--color-light) !important;
+    color: #212529 !important;
+}
+
+#especificaciones .tab-content h5,
+#especificaciones .tab-content li,
+#especificaciones .tab-content p {
+    color: #212529 !important;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--color-navy) !important;
+    color: var(--color-light) !important;
+    border-color: var(--color-navy) !important;
+}
+
+.nav-tabs .nav-link {
+    color: var(--color-navy) !important;
+}
+
+/* Sección Reseñas - CORREGIDO */
+#reseñas {
+    background-color: var(--color-light) !important;
+}
+
+#reseñas h2 {
+    color: var(--color-navy) !important;
+}
+
+#reseñas h4,
+#reseñas h5,
+#reseñas .card-title {
+    color: var(--color-navy) !important;
+}
+
+#reseñas .card-body,
+#reseñas .tab-content {
+    background-color: var(--color-light) !important;
+    color: #f6f7f8 !important;
+}
+
+/* Cards de productos y planes */
+.card-header.bg-navy {
+    background: var(--metallic-gradient) !important;
+}
+
+.card-header.bg-accent-vibrant {
+    background-color: var(--color-accent-vibrant) !important;
+    color: var(--color-navy) !important;
+}
+
+/* =========================
+3. Efecto de Contraste al Scroll (Dark Mode Dinámico - Transición Suave 2.0s)
+========================= */
+.transition-bg-color {
+    transition: background-color 2.0s ease-out, color 2.0s ease-out; 
+}
+
+body#main-body {
+    transition: background-color 2.0s ease-out; 
+}
+
+body.scrolled-contrast {
+    background-color: var(--color-navy); 
+}
+
+/* Aplicamos el contraste a los elementos DENTRO del body en modo oscuro */
+body.scrolled-contrast #hardware,
+body.scrolled-contrast #planes,
+body.scrolled-contrast #especificaciones,
+body.scrolled-contrast #reseñas { 
+    transition: background-color 2.0s ease-out !important; 
+    background-color: var(--color-bg-dark) !important; 
+}
+
+/* CORRECCIÓN: Especificaciones en modo oscuro */
+body.scrolled-contrast #especificaciones,
+body.scrolled-contrast #especificaciones .tab-content {
+    background-color: var(--color-bg-dark) !important;
+}
+
+body.scrolled-contrast #especificaciones .tab-content h5,
+body.scrolled-contrast #especificaciones .tab-content li,
+body.scrolled-contrast #especificaciones .tab-content p,
+body.scrolled-contrast #especificaciones .alert {
+    color: var(--color-light) !important;
+}
+
+/* CORRECCIÓN: Reseñas en modo oscuro - TÍTULOS VISIBLES */
+body.scrolled-contrast #reseñas,
+body.scrolled-contrast #reseñas .card-body {
+    background-color: var(--color-bg-dark) !important;
+}
+
+body.scrolled-contrast #reseñas h2,
+body.scrolled-contrast #reseñas h4,
+body.scrolled-contrast #reseñas h5,
+body.scrolled-contrast #reseñas .card-title {
+    color: var(--color-light) !important;
+}
+
+/* CORRECCIÓN: Textos de calificaciones en reseñas */
+body.scrolled-contrast #reseñas .rating-distribution span,
+body.scrolled-contrast #reseñas .form-label,
+body.scrolled-contrast #reseñas .form-text {
+    color: var(--color-light) !important;
+}
+
+/* CORRECCIÓN: Planes en modo oscuro - mantener colores originales */
+body.scrolled-contrast #planes .card-header.bg-navy {
+    background: var(--metallic-gradient) !important;
+    color: var(--color-light) !important;
+}
+
+body.scrolled-contrast #planes .card-header.bg-accent-vibrant {
+    background-color: var(--color-accent-vibrant) !important;
+    color: var(--color-navy) !important;
+}
+
+body.scrolled-contrast #planes .card-header.bg-success {
+    background-color: #198754 !important;
+    color: var(--color-light) !important;
+}
+
+/* CORRECCIÓN: Títulos de planes en modo oscuro */
+body.scrolled-contrast #planes h2,
+body.scrolled-contrast #planes .card-title,
+body.scrolled-contrast #planes h4,
+body.scrolled-contrast #planes h5,
+body.scrolled-contrast #planes h6 {
+    color: var(--color-light) !important;
+}
+
+/* CORRECCIÓN: Texto de planes en modo oscuro */
+body.scrolled-contrast #planes .card-body,
+body.scrolled-contrast #planes p,
+body.scrolled-contrast #planes li,
+body.scrolled-contrast #planes small {
+    color: var(--color-light) !important;
+}
+
+/* CORRECCIÓN: Precios en modo oscuro */
+body.scrolled-contrast .fw-bold.text-navy.fs-5,
+body.scrolled-contrast .h2,
+body.scrolled-contrast .h6 {
+    color: var(--color-light) !important;
+}
+
+/* CORRECCIÓN: Formulario de reseñas en modo oscuro */
+body.scrolled-contrast #review-form .form-label,
+body.scrolled-contrast #review-form .form-text {
+    color: var(--color-light) !important;
+}
+
+body.scrolled-contrast #review-form .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: var(--color-light) !important;
+}
+
+body.scrolled-contrast #review-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Cambio de color de texto SOLO en modo oscuro (scrolled-contrast) */
+body.scrolled-contrast h1, 
+body.scrolled-contrast h2, 
+body.scrolled-contrast h3,
+body.scrolled-contrast h4,
+body.scrolled-contrast .lead,
+body.scrolled-contrast p,
+body.scrolled-contrast .text-dark,
+body.scrolled-contrast .card-title,
+body.scrolled-contrast .card-text {
+    transition: color 2.0s ease-out !important; 
+    color: var(--color-light) !important;
+    /* AÑADIR este bloque para que los bordes de los títulos sean visibles */
+body.scrolled-contrast .border-navy {
+    border-color: var(--color-light) !important;
+}
+
+body.scrolled-contrast .border-accent-vibrant {
+    border-color: var(--color-accent-vibrant) !important; /* Mantiene el acento, pero visible */
+}
+
+body.scrolled-contrast .border-success {
+    border-color: #198754 !important; /* Mantiene el color verde, pero visible */
+}
+}
+
+/* Ajustes para texto secundario en modo oscuro */
+body.scrolled-contrast .text-muted {
+    transition: color 2.0s ease-out !important;
+    color: var(--color-light) !important; 
+    opacity: 0.8; 
+}
+
+/* Ajuste de Botones/Badges solo en modo oscuro */
+body.scrolled-contrast .badge {
+    background-color: var(--color-accent-vibrant) !important;
+    color: var(--color-navy) !important;
+}
+body.scrolled-contrast .btn-outline-navy {
+    color: var(--color-light); 
+    border-color: var(--color-light);
+}
+body.scrolled-contrast .btn-outline-navy:hover {
+    background-color: var(--color-light);
+    color: var(--color-navy);
+}
+
+/* Estilo de Tarjetas en modo Contraste */
+body.scrolled-contrast .interactive-card {
+    transition: background-color 2.0s ease-out, box-shadow 0.3s ease !important; 
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important; 
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5) !important; 
+}
+
+/* Iconos en modo oscuro */
+body.scrolled-contrast .feature-card-compact i,
+body.scrolled-contrast .spec-card i { 
+    transition: color 2.0s ease-out !important;
+    color: var(--color-accent-vibrant) !important;
+}
+body.scrolled-contrast .feature-badge-compact {
+    background-color: var(--color-accent-vibrant) !important;
+    color: var(--color-navy) !important;
+}
+
+/* Sobreescribimos el efecto hover metálico para el MODO OSCURO */
+body.scrolled-contrast .interactive-card:hover {
+    background: var(--metallic-hover-gradient) !important;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7), 0 0 0 5px rgba(30, 98, 168, 0.2); 
+}
+
+/* Estilos de la Navegación en Scroll */
+body.scrolled-contrast .navbar-brand,
+body.scrolled-contrast .navbar-nav .nav-link {
+    transition: color 2.0s ease-out !important;
+    color: var(--color-light) !important;
+}
+
+/* =========================
+Estilos para Formularios y Componentes de Comercio
+========================= */
+
+/* Campos de búsqueda y filtros */
+.form-control {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--color-accent-vibrant);
+    box-shadow: 0 0 0 0.2rem rgba(0, 207, 255, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--color-accent-vibrant);
+    box-shadow: 0 0 0 0.2rem rgba(0, 207, 255, 0.25);
+}
+
+/* Badges de productos */
+.badge.bg-light {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+/* Precios - CORREGIDO para modo claro */
+.fw-bold.text-navy.fs-5 {
+    color: var(--color-navy) !important;
+}
+
+.h2.text-navy {
+    color: var(--color-navy) !important;
+}
+
+/* Progress bars para reseñas */
+.progress-bar.bg-accent-vibrant {
+    background-color: var(--color-accent-vibrant) !important;
+}
+
+/* Star rating */
+.star-rating {
+    color: #f4f4f4;
+}
+.star-rating .star {
+    font-size: 1.5rem;
+    transition: all 0.2s;
+}
+.star-rating .star:hover {
+    transform: scale(1.2);
+}
+
+/* Average rating */
+.average-rating {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #eeeeee;
+}
+
+/* =========================
+Estilos para el Carrito y Offcanvas
+========================= */
+.offcanvas-header.bg-primary {
+    background: var(--metallic-gradient) !important;
+}
+
+#cart-items .list-group-item {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#cart-items .list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* =========================
+Estilos para Alertas y Toast
+========================= */
+.toast.bg-success {
+    background-color: #198754 !important;
+}
+
+.alert-info {
+    background-color: rgba(0, 207, 255, 0.1);
+    border-color: var(--color-accent-vibrant);
+    color: var(--color-navy);
+}
+
+.alert-success {
+    background-color: rgba(25, 135, 84, 0.1);
+    border-color: #198754;
+    color: #0f5132;
+}
+
+/* =========================
+Footer Styles
+========================= */
+.footer {
+    background: var(--metallic-gradient) !important;
+}
+
+/* =========================
+Navegación
+========================= */
+.navbar {
+    backdrop-filter: blur(10px);
+    background-color: rgba(14, 48, 94, 0.95) !important;
+}
+
+/* =========================
+Estilos Responsive
+========================= */
+@media (max-width: 768px) {
+    .form-control {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .average-rating {
+        font-size: 2rem;
+    }
+    
+    .star-rating .star {
+        font-size: 1.2rem;
+    }
+}
+
+/* Asegurar que todos los elementos tengan transiciones suaves */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Mejora visual para las secciones */
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+/* Títulos en modo claro */
+#hardware h2,
+#especificaciones h2,
+#especificaciones h5 {
+    color: var(--color-navy) !important; /* Color para modo claro */
+}
+
+/* Títulos en modo oscuro */
+body.scrolled-contrast #hardware h2,
+body.scrolled-contrast #especificaciones h2,
+body.scrolled-contrast #especificaciones h5 {
+    color: var(--color-light) !important; /* Cambia al color claro en modo oscuro */
+}
+
+/* Sección Especificaciones Técnicas */
+body.scrolled-contrast #especificaciones {
+    background-color: var(--color-bg-dark) !important; /* Asegura que el fondo sea oscuro */
+}
+/* Estilos para Transferencia Bancaria en el carrito */
+body.scrolled-contrast .offcanvas-header {
+    background: var(--metallic-gradient) !important;
+    color: var(--color-light) !important; /* Asegúrate de que el texto sea claro */
+}
+
+body.scrolled-contrast .form-check {
+    color: var(--color-light) !important; /* Color del texto de la opción de transferencia */
+}
+
+body.scrolled-contrast #transferencia-info {
+    background-color: rgba(0, 0, 0, 0.2) !important; /* Ajusta el fondo si es necesario */
+    color: var(--color-light) !important; /* Asegúrate de que el texto sea claro */
+}
+/* Estrellas en modo claro */
+.star-rating {
+    color: #f1efeb; /* Color dorado para modo claro */
+}
+
+/* Estrellas en modo oscuro */
+body.scrolled-contrast .star-rating {
+    color: #f1efeb; /* Cambia el color a un tono dorado más claro o brillante */
+}
+
+body.scrolled-contrast .star-rating .star {
+    color: #f1efeb; /* Asegúrate de que las estrellas individuales también tengan el mismo color */
+}
+
+/* ESTILOS MEJORADOS PARA MODALES */
+.modal-body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+.modal-body strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.modal-body .bg-light {
+  background-color: #f8f9fa !important;
+  border: 1px solid #e9ecef;
+}
+
+.modal-body .alert {
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.modal-body .text-primary {
+  color: #007bff !important;
+  font-weight: 600;
+}
+
+.modal-body .text-success {
+  color: #28a745 !important;
+}
+
+.modal-body .text-muted {
+  color: #6c757d !important;
+}
+
+/* Mejorar legibilidad de los datos bancarios */
+.bg-light.rounded {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.bg-light.rounded .row div {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.bg-light.rounded .row div:last-child {
+  border-bottom: none;
+}
+
+/* Estilos para números importantes */
+.fw-bold.text-primary.fs-5 {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+}
+
+/* Mejorar botones */
+.btn {
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,123,255,0.4);
+}
+
+/* Estilos para badges */
+.badge {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+}
+
+/* Mejorar iconos */
+.fas, .fab {
+  opacity: 0.9;
+}
+
+/* =========================
+ESTILOS DE ALTA VISIBILIDAD PARA LAS SECCIONES CON PROBLEMAS
+(MANTIENE TODAS LAS FUNCIONES EXISTENTES)
+========================= */
+
+/* Términos y Condiciones - Alta Visibilidad */
+.terms-section-high-vis {
+    background: #ffffff !important;
+    border: 3px solid #0e305e !important;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.terms-section-high-vis h4 {
+    color: #1a1a1a !important;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #0e305e;
+    padding-bottom: 10px;
+}
+
+.terms-checkbox-high-vis {
+    border: 2px solid #4a5568;
+    border-radius: 10px;
+    padding: 18px;
+    margin: 15px 0;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.terms-checkbox-high-vis.checked {
+    background: #e6f7ff;
+    border-color: #0e305e;
+    border-width: 3px;
+    box-shadow: 0 4px 8px rgba(14, 48, 94, 0.2);
+}
+
+.terms-checkbox-high-vis .form-check-label {
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.6;
+    display: block;
+    width: 100%;
+    color: #1a1a1a !important;
+    font-size: 1.05rem;
+}
+
+.terms-checkbox-high-vis .form-check-input {
+    cursor: pointer;
+    transform: scale(1.4);
+    margin-right: 15px;
+    border: 2px solid #4a5568;
+}
+
+.terms-checkbox-high-vis .form-check-input:checked {
+    background-color: #0e305e;
+    border-color: #0e305e;
+}
+
+/* Transferencia Bancaria - Alta Visibilidad */
+.bank-info-high-vis {
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+    border: 3px solid #0e305e;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bank-info-high-vis h4 {
+    color: #1a1a1a !important;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #0e305e;
+    padding-bottom: 10px;
+}
+
+.bank-detail-high-vis {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 8px;
+    border-left: 4px solid #0e305e;
+}
+
+.bank-label-high-vis {
+    font-weight: 700;
+    min-width: 140px;
+    color: #0e305e !important;
+    font-size: 1.1rem;
+}
+
+.bank-value-high-vis {
+    color: #1a1a1a !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* Confirmación de Pedido - Alta Visibilidad */
+.confirmation-section-high-vis {
+    background: #ffffff;
+    border: 3px solid #0e305e;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 25px 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.amount-high-vis {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 25px 0;
+    color: #0e305e !important;
+    background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #0e305e;
+}
+
+.bank-details-confirm-high-vis {
+    background: #f8f9fa;
+    border: 2px solid #4a5568;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.bank-detail-row-high-vis {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.bank-detail-row-high-vis:last-child {
+    border-bottom: none;
+}
+
+.bank-detail-label-high-vis {
+    font-weight: 700;
+    color: #1a1a1a !important;
+    font-size: 1.1rem;
+}
+
+.bank-detail-value-high-vis {
+    color: #0e305e !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: 'Courier New', monospace;
+}
+
+.terms-accepted-high-vis {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #155724 !important;
+    font-weight: 600;
+}
+
+/* Pedido Confirmado - Alta Visibilidad */
+.order-confirmed-high-vis {
+    background: #ffffff;
+    border: 4px solid #28a745;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 500px;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+    text-align: center;
+}
+
+.order-confirmed-high-vis h2 {
+    color: #28a745 !important;
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.order-confirmed-high-vis .success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.order-details-high-vis {
+    background: #f8f9fa;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+.order-detail-row-high-vis {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 1.1rem;
+}
+
+.order-detail-row-high-vis:last-child {
+    border-bottom: none;
+}
+
+.order-detail-label-high-vis {
+    font-weight: 700;
+    color: #1a1a1a !important;
+}
+
+.order-detail-value-high-vis {
+    font-weight: 700;
+    color: #0e305e !important;
+    font-family: 'Courier New', monospace;
+}
+
+/* Botones de Alta Visibilidad */
+.btn-high-vis {
+    font-weight: 700 !important;
+    font-size: 1.1rem;
+    padding: 15px 30px;
+    border: 3px solid;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-confirm-high-vis {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    border-color: #1e7e34 !important;
+    color: white !important;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4);
+}
+
+.btn-confirm-high-vis:hover {
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(40, 167, 69, 0.5);
+}
+
+.btn-cancel-high-vis {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    border-color: #545b62 !important;
+    color: white !important;
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.4);
+}
+
+.btn-cancel-high-vis:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #545b62 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.5);
+}
+
+/* Mejoras de Contraste Generales */
+.high-contrast-text {
+    color: #1a1a1a !important;
+    font-weight: 600;
+}
+
+.high-contrast-bg {
+    background: #ffffff !important;
+}
+
+.high-contrast-border {
+    border-color: #2d3748 !important;
+}
+
+/* Responsive para Alta Visibilidad */
+@media (max-width: 768px) {
+    .terms-section-high-vis,
+    .bank-info-high-vis,
+    .confirmation-section-high-vis {
+        padding: 20px;
+        margin: 15px 0;
+    }
+    
+    .bank-detail-high-vis {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .bank-label-high-vis {
+        min-width: auto;
+        margin-bottom: 5px;
+    }
+    
+    .amount-high-vis {
+        font-size: 2rem;
+        padding: 15px;
+    }
+    
+    .btn-high-vis {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
