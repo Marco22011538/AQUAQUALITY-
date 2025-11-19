@@ -1,10 +1,8 @@
 # Firebase
-firebase-config.js
 firebase-config.json
 .env
 .env.local
 firebase-app.js
-
 
 # Node.js
 node_modules/
@@ -29,3 +27,12 @@ pids
 *.pid
 *.seed
 *.pid.lock
+
+# Archivos de build/output
+dist/
+build/
+*.tmp
+
+# Archivos del sistema
+*.tmp
+*.temp
