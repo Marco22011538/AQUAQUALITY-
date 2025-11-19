@@ -58,3 +58,34 @@ try {
 }
 
 console.log('🎉 Build completado exitosamente!');
+// Configuración para firebaseConfig2 (comercio)
+const firebaseConfig2 = {
+    apiKey: process.env.FIREBASE_API_KEY_COMERCIO || '',
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN_COMERCIO || '',
+    projectId: process.env.FIREBASE_PROJECT_ID_COMERCIO || '',
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET_COMERCIO || '',
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID_COMERCIO || '',
+    appId: process.env.FIREBASE_APP_ID_COMERCIO || ''
+};
+
+// Procesar firebase-app.js para firebaseConfig2
+try {
+    console.log('🔧 Procesando firebaseConfig2 en firebase-app.js...');
+    const appConfigPath = './root/js/firebase-app.js';
+    const appConfigTemplate = fs.readFileSync(appConfigPath, 'utf8');
+    
+    let appConfigContent = appConfigTemplate;
+    Object.keys(firebaseConfig2).forEach(key => {
+        const placeholder = `{{${key.toUpperCase()}_COMERCIO}}`;
+        const value = firebaseConfig2[key];
+        const replacements = (appConfigContent.match(new RegExp(placeholder, 'g')) || []).length;
+        appConfigContent = appConfigContent.replace(new RegExp(placeholder, 'g'), value);
+        console.log(`   🔄 ${key}: ${replacements} reemplazos`);
+    });
+
+    fs.writeFileSync(appConfigPath, appConfigContent);
+    console.log('✅ firebaseConfig2 actualizada en firebase-app.js');
+    
+} catch (error) {
+    console.error('❌ Error procesando firebaseConfig2:', error.message);
+}

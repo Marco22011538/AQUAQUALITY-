@@ -2,7 +2,6 @@
 firebase-config.json
 .env
 .env.local
-firebase-app.js
 
 # Node.js
 node_modules/
