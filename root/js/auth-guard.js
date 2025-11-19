@@ -2,7 +2,7 @@ import { auth } from './firebase-app.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 export function protectPage(redirectTo = "login.html") {
-  // Evitar redirección en páginas de login/register
+  // Evitar redirección si ya estamos en login/register
   const currentPage = window.location.pathname;
   if (currentPage.includes('login.html') || currentPage.includes('register.html')) {
     return;
@@ -10,10 +10,13 @@ export function protectPage(redirectTo = "login.html") {
 
   onAuthStateChanged(auth, (user) => {
     if (!user) {
-      console.log('Usuario no autenticado, redirigiendo a login...');
-      window.location.href = redirectTo;
-    } else {
-      console.log('Usuario autenticado:', user.email);
+      console.log('🔐 Usuario no autenticado, redirigiendo a login...');
+      
+      // Agregar parámetro para evitar bucles
+      const url = new URL(redirectTo, window.location.origin);
+      url.searchParams.set('redirect', window.location.pathname);
+      
+      window.location.href = url.toString();
     }
   });
 }
