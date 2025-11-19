@@ -1,7 +1,7 @@
 import { auth } from './firebase-app.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-export function protectPage(redirectTo = "login.html") {
+export function protectPage(redirectTo = "index.html") {
   // Evitar redirección si ya estamos en login/register
   const currentPage = window.location.pathname;
   if (currentPage.includes('login.html') || currentPage.includes('register.html')) {
@@ -10,7 +10,7 @@ export function protectPage(redirectTo = "login.html") {
 
   onAuthStateChanged(auth, (user) => {
     if (!user) {
-      console.log('🔐 Usuario no autenticado, redirigiendo a login...');
+      console.log('🔐 Usuario no autenticado, redirigiendo a index...');
       
       // Agregar parámetro para evitar bucles
       const url = new URL(redirectTo, window.location.origin);
@@ -19,4 +19,5 @@ export function protectPage(redirectTo = "login.html") {
       window.location.href = url.toString();
     }
   });
+  
 }
